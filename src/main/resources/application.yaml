@@ -3,12 +3,12 @@ server:
 
 spring:
   application:
-      name: spring-orm-demo
+      name: notification-service
   # Database Credentials
   datasource:
     username: ${ADMIN_ROLE}
     password: ${ADMIN_PASS}
-    url: jdbc:rev-project3.chvwilb5xwei.us-east-1.rds.amazonaws.com:5432/postgres
+    url: jdbc:postgresql://rev-project3.chvwilb5xwei.us-east-1.rds.amazonaws.com:5432/postgres
   # hbm2ddl 
   jpa:
     hibernate:
