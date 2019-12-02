@@ -3,25 +3,25 @@ package com.revature.rpm.entities;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue(value = "Content")
+@DiscriminatorValue(value = "Comment")
 public class Comment extends Notification{
 	
 	@Column
-	private String content;
+	private String comment;
 
-	public String getContent() {
-		return content;
+	public String getComment() {
+		return comment;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		return result;
 	}
 
@@ -34,22 +34,22 @@ public class Comment extends Notification{
 		if (getClass() != obj.getClass())
 			return false;
 		Comment other = (Comment) obj;
-		if (content == null) {
-			if (other.content != null)
+		if (comment == null) {
+			if (other.comment != null)
 				return false;
-		} else if (!content.equals(other.content))
+		} else if (!comment.equals(other.comment))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Comment [content=" + content + "]";
+		return "Comment [comment=" + comment + "]";
 	}
 
-	public Comment(String content) {
+	public Comment(String comment) {
 		super();
-		this.content = content;
+		this.comment = comment;
 	}
 
 	public Comment() {
@@ -58,5 +58,4 @@ public class Comment extends Notification{
 	}
 
 	
-
 }
