@@ -1,8 +1,13 @@
 Manifest-Version: 1.0
 Implementation-Title: HIBERNATE - notification-service
 Implementation-Version: 0.0.1-SNAPSHOT
+<<<<<<< HEAD
 Built-By: ronbu
 Implementation-Vendor-Id: notification-service
+=======
+Built-By: airam
+Implementation-Vendor-Id: main
+>>>>>>> 4a04fab882a009f3dd18e32a352231d76a01e92c
 Build-Jdk: 1.8.0_221
 Implementation-URL: https://memorynotfound.com
 Created-By: Maven Integration for Eclipse
