@@ -22,7 +22,8 @@ public class Controller {
 
 	@PatchMapping("/")
 	
-	public void updateRead(@RequestBody ReadDTO readDTO) {
+	public Boolean updateRead(@RequestBody ReadDTO readDTO) {
 		notificationService.updateUnreadToRead(readDTO);
+		return true;
 	}
 }
