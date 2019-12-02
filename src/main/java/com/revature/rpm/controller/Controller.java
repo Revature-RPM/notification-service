@@ -30,7 +30,13 @@ public class Controller {
 	}
 
 	@PatchMapping("/")
+<<<<<<< HEAD
 	public void updateRead(@RequestBody ReadDTO readDTO) {
+=======
+	
+	public Boolean updateRead(@RequestBody ReadDTO readDTO) {
+>>>>>>> 0802e14d802964d0d0bc3b35cbe7f8110282d1b8
 		notificationService.updateUnreadToRead(readDTO);
+		return true;
 	}
 }
