@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  application:
+      name: spring-orm-demo
+  # Database Credentials
+  datasource:
+    username: ${VENDER_ROLE}
+    password: ${VENDER_PASS}
+    url: jdbc:postgresql://localhost:5432/postgres
+  # hbm2ddl 
+  jpa:
+    hibernate:
+      ddl-auto: update
