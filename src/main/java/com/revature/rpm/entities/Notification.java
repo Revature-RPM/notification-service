@@ -20,10 +20,7 @@ public abstract class Notification {
 	@Column(name = "is_read", columnDefinition = "boolean default false")
 	private boolean is_read;
 	
-	@Column(name = "title")
-	private String title;
-	
-	@Column
+	@Column(name = "date_created")
 	@Temporal(TemporalType.DATE)
 	private Date date_created;
 }
