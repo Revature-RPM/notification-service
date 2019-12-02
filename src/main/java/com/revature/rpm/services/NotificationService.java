@@ -20,7 +20,14 @@ public class NotificationService {
 		return true;
 		
 	}
-
+	/**
+	 * Service to find all
+	 * Page is given from Control
+	 * Return page by date
+	 * 
+	 * @param page
+	 * @return
+	 */
 	public Page<NotificationDTO> getNotificationsByPage(Pageable page) {
 		return notificationRepository.findAllByOrderByDate(page);
 	}

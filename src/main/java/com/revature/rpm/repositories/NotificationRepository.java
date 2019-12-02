@@ -11,6 +11,14 @@ import com.revature.rpm.entities.Notification;
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Integer>{
 
+	/**
+	 * Chilly winter-time
+	 * For notification find
+     * a pagination
+     * 
+	 * @param page
+	 * @return
+	 */
 	Page<NotificationDTO> findAllByOrderByDate(Pageable page);
 
 }
