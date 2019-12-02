@@ -1,4 +1,4 @@
-package testing.models;
+package com.revature.rpm.models;
 
 import javax.persistence.*;
 
