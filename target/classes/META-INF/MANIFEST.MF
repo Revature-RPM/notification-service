@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: HIBERNATE - notification-service
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: emadd
+Built-By: ctrol
 Implementation-Vendor-Id: main
 Build-Jdk: 1.8.0_221
 Implementation-URL: https://memorynotfound.com
