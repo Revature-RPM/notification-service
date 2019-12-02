@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.client.HttpClientErrorException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.advisor.ExceptionHandlerAdvisor;
@@ -65,5 +66,35 @@ public class ControllerTest {
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(om.writeValueAsString(readDTO)))
 			.andExpect(status().is(HttpStatus.OK.value()));
+	}
+	
+	@Test
+	public void updateReadNotFound() throws Exception {
+		ReadDTO readDTO = new ReadDTO();
+		readDTO.setNotification_id(1);
+		readDTO.setUser_id(1);
+		when(mockNotificationService
+			.updateUnreadToRead(readDTO))
+			.thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
+		this.mockMvc
+			.perform(patch("/")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(om.writeValueAsString(readDTO)))
+			.andExpect(status().is(HttpStatus.NOT_FOUND.value()));
+	}
+	
+	@Test
+	public void updateReadPermissionDenied() throws Exception {
+		ReadDTO readDTO = new ReadDTO();
+		readDTO.setNotification_id(1);
+		readDTO.setUser_id(1);
+		when(mockNotificationService
+			.updateUnreadToRead(readDTO))
+			.thenThrow(new HttpClientErrorException(HttpStatus.FORBIDDEN));
+		this.mockMvc
+			.perform(patch("/")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(om.writeValueAsString(readDTO)))
+			.andExpect(status().is(HttpStatus.FORBIDDEN.value()));
 	}
 }
