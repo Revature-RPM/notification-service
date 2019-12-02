@@ -63,7 +63,7 @@ public class ControllerTest {
 		this.mockMvc
 			.perform(patch("/")
 			.contentType(MediaType.APPLICATION_JSON)
-			.content(om.writeValueAsString(readDTO))
-			.andExpect(status().is(HttpStatus.OK.value())));
+			.content(om.writeValueAsString(readDTO)))
+			.andExpect(status().is(HttpStatus.OK.value()));
 	}
 }
