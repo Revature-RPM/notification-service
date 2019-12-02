@@ -6,9 +6,10 @@ spring:
       name: spring-orm-demo
   # Database Credentials
   datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgres://rev-project3.chvwilb5xwei.us-east-1.rds.amazonaws.com:5432/postgres
     username: ${ADMIN_ROLE}
     password: ${ADMIN_PASS}
-    url: jdbc:rev-project3.chvwilb5xwei.us-east-1.rds.amazonaws.com:5432/postgres
   # hbm2ddl 
   jpa:
     hibernate:
