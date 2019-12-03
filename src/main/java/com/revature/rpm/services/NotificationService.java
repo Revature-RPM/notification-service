@@ -1,5 +1,8 @@
 package com.revature.rpm.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,6 +32,22 @@ public class NotificationService {
 	 * @return
 	 */
 	public Page<NotificationDTO> getNotificationsByPage(Pageable page) {
-		return notificationRepository.findAllByOrderByDate(page);
+		return notificationRepository.findAllByOrderByDateCreated(page);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<NotificationDTO> getAllNewNotifications() {
+
+			List<NotificationDTO> newNotifications =  notificationRepository.getNotificationByIsReadFalse();
+			return newNotifications;
+		
+//		if (newNotifications.size() <= 5) {
+//			final int remainder = (5 - newNotifications.size());
+//			
+//			List<NotificationDTO> recentNotifications = notificationRepository.getNotifications
+//		}
 	}
 }

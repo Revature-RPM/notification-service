@@ -1,5 +1,7 @@
 package com.revature.rpm.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +25,12 @@ public class Controller {
 		super();
 		this.notificationService = notificationService;
 	}
+	
+	@GetMapping("/")
+	public List<NotificationDTO> getAllNewNotifications() {
+		return notificationService.getAllNewNotifications();
+	}
+	
 	
 	@GetMapping("/history")
 	public Page<NotificationDTO> getNotificationsByPage(Pageable page) {
