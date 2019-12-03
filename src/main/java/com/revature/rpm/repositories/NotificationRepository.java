@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.revature.rpm.dto.NotificationDTO;
+import com.revature.rpm.entities.Comment;
 import com.revature.rpm.entities.Notification;
 
 @Repository
@@ -28,6 +29,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	 * 
 	 * @return
 	 */
-	List<NotificationDTO> getNotificationByIsReadFalse();
+	List<Comment> getNotificationsByIsReadFalse();
 
 }

@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.rpm.dto.NotificationDTO;
 import com.revature.rpm.dto.ReadDTO;
+import com.revature.rpm.entities.Comment;
 import com.revature.rpm.services.NotificationService;
 
 @RestController
 @RequestMapping("")
 public class Controller {
-	private NotificationService notificationService;
+	
+	NotificationService notificationService;
 	
 	@Autowired
 	public Controller(NotificationService notificationService) {
@@ -27,7 +29,7 @@ public class Controller {
 	}
 	
 	@GetMapping("/")
-	public List<NotificationDTO> getAllNewNotifications() {
+	public List<Comment> getAllNewNotifications() {
 		return notificationService.getAllNewNotifications();
 	}
 	
