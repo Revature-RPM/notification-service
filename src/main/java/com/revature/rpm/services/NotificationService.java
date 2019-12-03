@@ -51,12 +51,7 @@ public class NotificationService {
 		
 		System.out.println("getAllNewNotifications is running.");
 		List<Comment> newNotifications =  notificationRepository.getNotificationsByIsReadFalse();
-		return newNotifications;
 		
-//		if (newNotifications.size() <= 5) {
-//			final int remainder = (5 - newNotifications.size());
-//			
-//			List<NotificationDTO> recentNotifications = notificationRepository.getNotifications
-//		}
+		return newNotifications;
 	}
 }

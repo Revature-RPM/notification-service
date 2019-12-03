@@ -18,7 +18,7 @@ public abstract class Notification {
 	private int projectId;
 	
 	@Column(name = "title")
-	private int title;
+	private String title;
 	
 	@Column(name = "is_read", columnDefinition = "boolean default false")
 	private boolean isRead;
@@ -44,11 +44,11 @@ public abstract class Notification {
 		this.projectId = projectId;
 	}
 
-	public int getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(int title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
@@ -76,7 +76,7 @@ public abstract class Notification {
 		result = prime * result + (isRead ? 1231 : 1237);
 		result = prime * result + notificationId;
 		result = prime * result + projectId;
-		result = prime * result + title;
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
 
@@ -100,7 +100,10 @@ public abstract class Notification {
 			return false;
 		if (projectId != other.projectId)
 			return false;
-		if (title != other.title)
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
 			return false;
 		return true;
 	}
@@ -111,7 +114,7 @@ public abstract class Notification {
 				+ ", isRead=" + isRead + ", dateCreated=" + dateCreated + "]";
 	}
 
-	public Notification(int notificationId, int projectId, int title, boolean isRead, Date dateCreated) {
+	public Notification(int notificationId, int projectId, String title, boolean isRead, Date dateCreated) {
 		super();
 		this.notificationId = notificationId;
 		this.projectId = projectId;
@@ -124,5 +127,7 @@ public abstract class Notification {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+
 	
 }
