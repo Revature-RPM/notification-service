@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.rpm.dto.NotificationDTO;
 import com.revature.rpm.dto.ReadDTO;
 import com.revature.rpm.entities.Comment;
 import com.revature.rpm.services.NotificationService;
@@ -34,7 +33,7 @@ public class Controller {
 	}
 	
 	@GetMapping("/history")
-	public Page<NotificationDTO> getNotificationsByPage(Pageable page) {
+	public Page<Comment> getNotificationsByPage(Pageable page) {
 		return notificationService.getNotificationsByPage(page);
 	}
 

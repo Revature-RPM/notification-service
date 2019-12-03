@@ -16,6 +16,9 @@ public abstract class Notification {
 	
 	@Column(name = "project_id")
 	private int projectId;
+
+	@Column(name = "user_id")
+	private int userId;
 	
 	@Column(name = "title")
 	private String title;
@@ -42,6 +45,14 @@ public abstract class Notification {
 
 	public void setProjectId(int projectId) {
 		this.projectId = projectId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getTitle() {
@@ -77,6 +88,7 @@ public abstract class Notification {
 		result = prime * result + notificationId;
 		result = prime * result + projectId;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + userId;
 		return result;
 	}
 
@@ -105,19 +117,22 @@ public abstract class Notification {
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
+		if (userId != other.userId)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Notification [notificationId=" + notificationId + ", projectId=" + projectId + ", title=" + title
-				+ ", isRead=" + isRead + ", dateCreated=" + dateCreated + "]";
+		return "Notification [notificationId=" + notificationId + ", projectId=" + projectId + ", userId=" + userId
+				+ ", title=" + title + ", isRead=" + isRead + ", dateCreated=" + dateCreated + "]";
 	}
 
-	public Notification(int notificationId, int projectId, String title, boolean isRead, Date dateCreated) {
+	public Notification(int notificationId, int projectId, int userId, String title, boolean isRead, Date dateCreated) {
 		super();
 		this.notificationId = notificationId;
 		this.projectId = projectId;
+		this.userId = userId;
 		this.title = title;
 		this.isRead = isRead;
 		this.dateCreated = dateCreated;
@@ -127,7 +142,6 @@ public abstract class Notification {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	
 }
