@@ -58,9 +58,22 @@ public class NotificationService {
 	 * @return
 	 */
 	public List<Comment> getAllNewNotifications() {
+
+		List<Comment> newNotifications =  notificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc();
 		
-		System.out.println("getAllNewNotifications is running.");
-		List<Comment> newNotifications =  notificationRepository.getNotificationsByIsReadFalse();
+		if (newNotifications.size() < 5) {
+			final int numNeeded = 5 - newNotifications.size();
+			System.out.println(numNeeded);
+			
+			List<Comment> fillerNotifications = notificationRepository.getTop5NotifcationsByIsReadTrueOrderByDateCreatedDesc();
+			System.out.println(fillerNotifications);
+			
+			for(int i = 0; i < numNeeded; i++) {
+				newNotifications.add(i, fillerNotifications.get(i));
+			}
+			
+			//newNotifications.addAll(fillerNotifications);
+		}
 		
 		return newNotifications;
 	}
