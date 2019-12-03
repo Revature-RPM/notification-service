@@ -33,7 +33,6 @@ public class Controller {
 		return notificationService.getAllNewNotifications();
 	}
 	
-	
 	@GetMapping("/history")
 	public Page<NotificationDTO> getNotificationsByPage(Pageable page) {
 		return notificationService.getNotificationsByPage(page);

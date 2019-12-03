@@ -17,6 +17,9 @@ public abstract class Notification {
 	@Column(name = "project_id")
 	private int projectId;
 	
+	@Column(name = "title")
+	private int title;
+	
 	@Column(name = "is_read", columnDefinition = "boolean default false")
 	private boolean isRead;
 	
@@ -39,6 +42,14 @@ public abstract class Notification {
 
 	public void setProjectId(int projectId) {
 		this.projectId = projectId;
+	}
+
+	public int getTitle() {
+		return title;
+	}
+
+	public void setTitle(int title) {
+		this.title = title;
 	}
 
 	public boolean isRead() {
@@ -65,6 +76,7 @@ public abstract class Notification {
 		result = prime * result + (isRead ? 1231 : 1237);
 		result = prime * result + notificationId;
 		result = prime * result + projectId;
+		result = prime * result + title;
 		return result;
 	}
 
@@ -88,19 +100,22 @@ public abstract class Notification {
 			return false;
 		if (projectId != other.projectId)
 			return false;
+		if (title != other.title)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Notification [notificationId=" + notificationId + ", projectId=" + projectId + ", isRead=" + isRead
-				+ ", dateCreated=" + dateCreated + "]";
+		return "Notification [notificationId=" + notificationId + ", projectId=" + projectId + ", title=" + title
+				+ ", isRead=" + isRead + ", dateCreated=" + dateCreated + "]";
 	}
 
-	public Notification(int notificationId, int projectId, boolean isRead, Date dateCreated) {
+	public Notification(int notificationId, int projectId, int title, boolean isRead, Date dateCreated) {
 		super();
 		this.notificationId = notificationId;
 		this.projectId = projectId;
+		this.title = title;
 		this.isRead = isRead;
 		this.dateCreated = dateCreated;
 	}
@@ -109,6 +124,5 @@ public abstract class Notification {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
+	
 }
