@@ -19,6 +19,8 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	 * @param page
 	 * @return
 	 */
-	Page<NotificationDTO> findAllByOrderByDate(Pageable page);
+	//Page<NotificationDTO> findAllByOrderByDate(Pageable page);
+	
 
+	
 }
