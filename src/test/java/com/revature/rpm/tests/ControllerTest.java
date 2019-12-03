@@ -31,7 +31,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.advisor.ExceptionHandlerAdvisor;
 import com.revature.rpm.controller.Controller;
-import com.revature.rpm.dto.NotificationDTO;
 import com.revature.rpm.dto.ReadDTO;
 import com.revature.rpm.entities.Notification;
 import com.revature.rpm.services.NotificationService;
@@ -109,26 +108,6 @@ public class ControllerTest {
 	
 	@Test
 	public void getAllByOrderByDate() throws Exception {
-		private final int PAGE_NUMBER = 1;
-		private final int PAGE_SIZE = 5;
-		
-		private Pageable page = pageRequest.of(0, 8);
-		
-		NotificationDTO notification = new NotificationDTO();
-			notification.setNotification_id(1);
-			notification.setProject_id(1);
-			notification.setIs_read(true);
-			notification.setContent_Type("Comment");
-			notification.setComment("Test");
-
-		List<NotificationDTO> notifications = new ArrayList<>();
-			notifications.add(notification);
-		Page<NotificationDTO> pagedNotifications = new PageImpl(notifications);
-
-			
-		// Stubbing the implementation of the getNotificationsByPage method
-			when(mockNotificationService.getNotificationsByPage(page))
-				.thenReturn(pagedNotifications);
 		
 	}
 }
