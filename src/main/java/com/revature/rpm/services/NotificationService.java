@@ -1,5 +1,6 @@
 package com.revature.rpm.services;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -71,10 +72,14 @@ public class NotificationService {
 			for(int i = 0; i < numNeeded; i++) {
 				newNotifications.add(i, fillerNotifications.get(i));
 			}
-			
-			//newNotifications.addAll(fillerNotifications);
 		}
 		
+		//sort the whole list by date
+		Collections.sort(newNotifications, (a,b) -> {
+			return a.getDateCreated().compareTo(b.getDateCreated());
+		});
+		//change the order where the latest is the top
+		Collections.reverse(newNotifications);
 		return newNotifications;
 	}
 }
