@@ -1,5 +1,7 @@
 package com.revature.rpm.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
-import com.revature.rpm.dto.NotificationDTO;
 import com.revature.rpm.dto.ReadDTO;
+import com.revature.rpm.entities.Comment;
 import com.revature.rpm.entities.Notification;
 import com.revature.rpm.repositories.NotificationRepository;
 
@@ -18,6 +20,12 @@ import com.revature.rpm.repositories.NotificationRepository;
 public class NotificationService {
 	
 	NotificationRepository notificationRepository;
+	
+	@Autowired
+	public NotificationService(NotificationRepository notificationRepository) {
+		super();
+		this.notificationRepository = notificationRepository;
+	}
 	
 	@Transactional
 	public Boolean updateUnreadToRead(ReadDTO readDTO) {
@@ -32,12 +40,7 @@ public class NotificationService {
 		return true;
 		
 	}
-	
-	@Autowired
-	public NotificationService(NotificationRepository notificationRepository) {
-		super();
-		this.notificationRepository = notificationRepository;
-	}
+
 	/**
 	 * Service to find all
 	 * Page is given from Control
@@ -46,7 +49,32 @@ public class NotificationService {
 	 * @param page
 	 * @return
 	 */
-	public Page<NotificationDTO> getNotificationsByPage(Pageable page) {
-		return notificationRepository.findAllByOrderByDate(page);
+	public Page<Comment> getNotificationsByPage(Pageable page) {
+		return notificationRepository.findAllByOrderByDateCreated(page);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Comment> getAllNewNotifications() {
+
+		List<Comment> newNotifications =  notificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc();
+		
+		if (newNotifications.size() < 5) {
+			final int numNeeded = 5 - newNotifications.size();
+			System.out.println(numNeeded);
+			
+			List<Comment> fillerNotifications = notificationRepository.getTop5NotifcationsByIsReadTrueOrderByDateCreatedDesc();
+			System.out.println(fillerNotifications);
+			
+			for(int i = 0; i < numNeeded; i++) {
+				newNotifications.add(i, fillerNotifications.get(i));
+			}
+			
+			//newNotifications.addAll(fillerNotifications);
+		}
+		
+		return newNotifications;
 	}
 }

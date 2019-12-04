@@ -19,7 +19,6 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import com.revature.rpm.dto.ReadDTO;
 import com.revature.rpm.entities.Comment;
-import com.revature.rpm.entities.Notification;
 import com.revature.rpm.repositories.NotificationRepository;
 import com.revature.rpm.services.NotificationService;
 
