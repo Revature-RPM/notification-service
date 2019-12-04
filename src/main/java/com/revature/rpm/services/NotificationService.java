@@ -58,13 +58,13 @@ public class NotificationService {
 	 * @return
 	 */
 	public List<Comment> getAllNewNotifications() {
-
+		//Creating a list with notifications that are not read
 		List<Comment> newNotifications =  notificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc();
 		
 		if (newNotifications.size() < 5) {
 			final int numNeeded = 5 - newNotifications.size();
 			System.out.println(numNeeded);
-			
+			//Creating a list with notification that are read
 			List<Comment> fillerNotifications = notificationRepository.getTop5NotifcationsByIsReadTrueOrderByDateCreatedDesc();
 			System.out.println(fillerNotifications);
 			

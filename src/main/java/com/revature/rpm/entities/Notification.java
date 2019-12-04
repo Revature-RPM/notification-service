@@ -28,7 +28,7 @@ public abstract class Notification {
 	
 	// Does not currently auto-generate date as a default. Need to look into if adtl time. 
 	@Column(name = "date_created")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCreated;
 
 	public int getNotificationId() {
