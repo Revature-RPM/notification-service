@@ -6,10 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.List;
-=======
->>>>>>> parent of 74810aa... modify ServiceTest and Comment
 import java.util.Optional;
 
 import org.junit.Before;
@@ -27,26 +24,23 @@ import com.revature.rpm.entities.Comment;
 import com.revature.rpm.repositories.NotificationRepository;
 import com.revature.rpm.services.NotificationService;
 
-<<<<<<< HEAD
-=======
 import antlr.collections.List;
 
->>>>>>> parent of 74810aa... modify ServiceTest and Comment
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ServiceTest {
 	@Mock
 	NotificationRepository mockNotificationRepository;
-	
-	
+
+
 	@InjectMocks
 	private NotificationService notificationService;
-	
+
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 	}
-	
+
 	@Test
 	public void happyPath() throws Exception {
 		ReadDTO readDTO = new ReadDTO();
@@ -59,7 +53,7 @@ public class ServiceTest {
 		assertSame("The Notification Repository returns true on success with setReadToTrue", true, returnValue);
 		verify(mockNotificationRepository).findById(1);
 	}
-	
+
 	@Test(expected = HttpClientErrorException.class)
 	public void notFoundPath() throws Exception {
 		ReadDTO readDTO = new ReadDTO();
@@ -87,7 +81,7 @@ public class ServiceTest {
 	public void getAllIsReadFalse(){
 		List<Comment> testList = new ArrayList<>();
 		
-		
+
 		ReadDTO readDTO = new ReadDTO();
 		readDTO.setNotification_id(1);
 		readDTO.setUser_id(1);
@@ -97,19 +91,15 @@ public class ServiceTest {
 		assertSame("The Notification Repository returns true on success with setReadToTrue", true, returnValue);
 		verify(mockNotificationRepository).findById(1);
 	}
-<<<<<<< HEAD
 	*/
-=======
-	
->>>>>>> parent of 74810aa... modify ServiceTest and Comment
 	//Test #2 Returns 5 read notifications
-	
+
 	//Test #3 Returns 4 unread and 1 read notifications
-	
+
 	//Test #4 Returns 3 unread and 2 read notifications
-	
+
 	//Test #5 Returns 2 unread and 3 read notifications
-	
+
 	//Test #5 Returns 1 unread and 4 read notifications
-	
+
 }
