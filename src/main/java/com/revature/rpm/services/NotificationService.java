@@ -30,12 +30,13 @@ public class NotificationService {
 	
 	@Transactional
 	public Boolean updateUnreadToRead(ReadDTO readDTO) {
-		int notification_id = readDTO.getNotification_id();
+		int notificationId = readDTO.getNotification_id();
 		
-		int user_id = readDTO.getUser_id();
+		int userId = readDTO.getUser_id();
 		
-		Notification notification = notificationRepository.findById(notification_id)
+		Notification notification = notificationRepository.findById(notificationId)
 				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+		if(notification.getUserId()!=userId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
 		notification.setRead(true);
 		notificationRepository.save(notification);
 		return true;
