@@ -82,4 +82,8 @@ public class NotificationService {
 		Collections.reverse(newNotifications);
 		return newNotifications;
 	}
+
+	public void save(Notification notification) {
+		notificationRepository.save(notification);	
+	}
 }
