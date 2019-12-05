@@ -6,4 +6,3 @@ Implementation-Vendor-Id: notification-service
 Build-Jdk: 1.8.0_221
 Implementation-URL: https://memorynotfound.com
 Created-By: Maven Integration for Eclipse
-
