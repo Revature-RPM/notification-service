@@ -24,8 +24,6 @@ import com.revature.rpm.entities.Comment;
 import com.revature.rpm.repositories.NotificationRepository;
 import com.revature.rpm.services.NotificationService;
 
-import antlr.collections.List;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ServiceTest {
