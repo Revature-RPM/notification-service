@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.revature.rpm.entities.Comment;
@@ -17,12 +16,12 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	/**
 	 * Chilly winter-time
 	 * For notification find
-     * a pagination
+     * A pagination
      * 
 	 * @param page
 	 * @return
 	 */
-	Page<Comment> findAllByOrderByDateCreated(Pageable page);
+	Page<Comment> findAllByOrderByDateCreatedDesc(Pageable page);
 
 	/**
 	 * 
