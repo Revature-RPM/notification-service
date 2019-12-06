@@ -17,12 +17,12 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	/**
 	 * Chilly winter-time
 	 * For notification find
-     * a pagination
+     * A pagination
      * 
 	 * @param page
 	 * @return
 	 */
-	Page<Comment> findAllByOrderByDateCreated(Pageable page);
+	Page<Comment> findAllByOrderByDateCreatedDesc(Pageable page);
 
 	/**
 	 * 

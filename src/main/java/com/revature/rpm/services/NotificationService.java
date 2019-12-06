@@ -52,7 +52,7 @@ public class NotificationService {
 	 * @return
 	 */
 	public Page<Comment> getNotificationsByPage(Pageable page) {
-		return notificationRepository.findAllByOrderByDateCreated(page);
+		return notificationRepository.findAllByOrderByDateCreatedDesc(page);
 	}
 	
 	/**
