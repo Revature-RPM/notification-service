@@ -42,4 +42,9 @@ public class Controller {
 		notificationService.updateUnreadToRead(readDTO);
 		return true;
 	}
+	@PatchMapping("/unread/")
+	public Boolean updateUnread(@RequestBody ReadDTO readDTO) {
+		notificationService.updateReadToUnread(readDTO);
+		return true;
+	}
 }

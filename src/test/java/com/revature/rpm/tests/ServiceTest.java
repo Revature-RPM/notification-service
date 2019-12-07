@@ -41,7 +41,7 @@ public class ServiceTest {
 	}
 
 	@Test
-	public void happyPath() throws Exception {
+	public void readHappyPath() throws Exception {
 		ReadDTO readDTO = new ReadDTO();
 		readDTO.setNotification_id(1);
 		readDTO.setUser_id(1);
@@ -50,11 +50,12 @@ public class ServiceTest {
 		when(mockNotificationRepository.findById(1)).thenReturn(Optional.of(comment));
 		Boolean returnValue = notificationService.updateUnreadToRead(readDTO);
 		assertSame("The Notification Repository returns true on success with setReadToTrue", true, returnValue);
+		assertSame("The value of isRead on comment should be true",true,comment.isRead());
 		verify(mockNotificationRepository).findById(1);
 	}
 
 	@Test(expected = HttpClientErrorException.class)
-	public void notFoundPath() throws Exception {
+	public void readNotFoundPath() throws Exception {
 		ReadDTO readDTO = new ReadDTO();
 		readDTO.setNotification_id(1);
 		readDTO.setUser_id(1);
@@ -63,7 +64,7 @@ public class ServiceTest {
 		fail("Exception should have been thrown due to empty optional");
 	}
 	@Test(expected = HttpClientErrorException.class)
-	public void forbiddenPath() throws Exception {
+	public void readForbiddenPath() throws Exception {
 		ReadDTO readDTO = new ReadDTO();
 		readDTO.setNotification_id(1);
 		readDTO.setUser_id(1);
@@ -73,7 +74,40 @@ public class ServiceTest {
 		Boolean returnValue = notificationService.updateUnreadToRead(readDTO);
 		fail("Exception should have been thrown due to readDTO user not matching user listed on returned notification");
 	}
-	
+	@Test
+	public void unreadHappyPath() throws Exception {
+		ReadDTO readDTO = new ReadDTO();
+		readDTO.setNotification_id(1);
+		readDTO.setUser_id(1);
+		Comment comment = new Comment();
+		comment.setUserId(1);
+		when(mockNotificationRepository.findById(1)).thenReturn(Optional.of(comment));
+		Boolean returnValue = notificationService.updateReadToUnread(readDTO);
+		assertSame("The Notification Repository returns true on success with setReadToTrue", true, returnValue);
+		assertSame("The value of isRead on comment should be false",false,comment.isRead());
+		verify(mockNotificationRepository).findById(1);
+	}
+
+	@Test(expected = HttpClientErrorException.class)
+	public void unreadNotFoundPath() throws Exception {
+		ReadDTO readDTO = new ReadDTO();
+		readDTO.setNotification_id(1);
+		readDTO.setUser_id(1);
+		when(mockNotificationRepository.findById(1)).thenReturn(Optional.empty());
+		Boolean returnValue = notificationService.updateUnreadToRead(readDTO);
+		fail("Exception should have been thrown due to empty optional");
+	}
+	@Test(expected = HttpClientErrorException.class)
+	public void unreadForbiddenPath() throws Exception {
+		ReadDTO readDTO = new ReadDTO();
+		readDTO.setNotification_id(1);
+		readDTO.setUser_id(1);
+		Comment comment = new Comment();
+		comment.setUserId(2);
+		when(mockNotificationRepository.findById(1)).thenReturn(Optional.of(comment));
+		Boolean returnValue = notificationService.updateUnreadToRead(readDTO);
+		fail("Exception should have been thrown due to readDTO user not matching user listed on returned notification");
+	}
 	//Create tests for the Get: "/" methods
 	//Test #1 Returns 5 unread notifications
 	@Test
