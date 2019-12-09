@@ -29,7 +29,7 @@ public class NotificationService {
 	}
 	
 	@Transactional
-	public Boolean updateUnreadToRead(ReadDTO readDTO) {
+	public Boolean updateUnreadToRead(int jwtUserId, ReadDTO readDTO) {
 		int notificationId = readDTO.getNotification_id();
 		
 		int userId = readDTO.getUser_id();
@@ -37,13 +37,14 @@ public class NotificationService {
 		Notification notification = notificationRepository.findById(notificationId)
 				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
 		if(notification.getUserId()!=userId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
+		if(notification.getUserId()!=jwtUserId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
 		notification.setRead(true);
 		notificationRepository.save(notification);
 		return true;
 		
 	}
 	@Transactional
-	public Boolean updateReadToUnread(ReadDTO readDTO) {
+	public Boolean updateReadToUnread(int jwtUserId, ReadDTO readDTO) {
 		int notificationId = readDTO.getNotification_id();
 		
 		int userId = readDTO.getUser_id();
@@ -51,6 +52,7 @@ public class NotificationService {
 		Notification notification = notificationRepository.findById(notificationId)
 				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
 		if(notification.getUserId()!=userId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
+		if(notification.getUserId()!=jwtUserId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
 		notification.setRead(false);
 		notificationRepository.save(notification);
 		return true;
