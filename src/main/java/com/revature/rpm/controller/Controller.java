@@ -34,23 +34,26 @@ public class Controller {
 	@GetMapping("/")
 	public List<Comment> getAllNewNotifications(@RequestHeader("Authorization") String jws) {
 		int userid = jwtserv.extractUserIdFromJWT(jws);
-		System.out.println(userid);
+		System.out.println("Getting notifications for userid: " + userid + "...");
 		return notificationService.getAllNewNotifications();
 	}
 	
 	@GetMapping("/history")
 	public Page<Comment> getNotificationsByPage(@RequestHeader("Authorization") String jws, Pageable page) {
 		int userid = jwtserv.extractUserIdFromJWT(jws);
+		System.out.println("Getting pagenated notifications for userid: " + userid + " Page number: " + page + "...");
 		return notificationService.getNotificationsByPage(page);
 	}
 
 	@PatchMapping("/")
-	public Boolean updateRead(@RequestBody ReadDTO readDTO) {
+	public Boolean updateRead(@RequestBody ReadDTO readDTO, @RequestHeader("Authorization") String jws) {
+		System.out.println("Updating read status of notificationId: " + readDTO.getNotification_id() + " to read...");
 		notificationService.updateUnreadToRead(readDTO);
 		return true;
 	}
 	@PatchMapping("/unread/")
-	public Boolean updateUnread(@RequestBody ReadDTO readDTO) {
+	public Boolean updateUnread(@RequestBody ReadDTO readDTO, @RequestHeader("Authorization") String jws) {
+		System.out.println("Updating read status of notificationId: " + readDTO.getNotification_id() + " to unread...");
 		notificationService.updateReadToUnread(readDTO);
 		return true;
 	}
