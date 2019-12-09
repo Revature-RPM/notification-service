@@ -1,260 +1,151 @@
 
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>main</groupId>
-
   <artifactId>notification-service</artifactId>
-
   <version>0.0.1-SNAPSHOT</version>
-
   <name>HIBERNATE - ${project.artifactId}</name>
-
     <url>https://memorynotfound.com</url>
     <parent>
-
 		<groupId>org.springframework.boot</groupId>
-
 		<artifactId>spring-boot-starter-parent</artifactId>
-
 		<version>2.1.1.BUILD-SNAPSHOT</version>
-
 	</parent>
 	<dependencyManagement>
-
 		<dependencies>
-
 			<dependency>
-
 				<groupId>org.springframework.data</groupId>
-
 				<artifactId>spring-data-releasetrain</artifactId>
-
 				<version>Lovelace-SR5</version>
-
 				<scope>import</scope>
-
 				<type>pom</type>
-
 			</dependency>
-
 		</dependencies>
-
 	</dependencyManagement>
-
 	<dependencies>
-
 		<dependency>
-
 			<groupId>org.springframework.data</groupId>
-
 			<artifactId>spring-data-jpa</artifactId>
-
 		</dependency>
 		<dependency>
-
 			<groupId>org.springframework</groupId>
-
 			<artifactId>spring-orm</artifactId>
-
 		</dependency>
 		<dependency>
-
 			<groupId>org.springframework.boot</groupId>
-
 			<artifactId>spring-boot-starter-web</artifactId>
-
 		</dependency>
 		<dependency>
-
 			<groupId>org.springframework.boot</groupId>
-
 			<artifactId>spring-boot-devtools</artifactId>
-
 		</dependency>
-
 		<dependency>
-
 			<groupId>org.springframework.boot</groupId>
-
 			<artifactId>spring-boot-starter-actuator</artifactId>
-
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-
 		<dependency>
-
 			<groupId>org.hibernate</groupId>
-
 			<artifactId>hibernate-core</artifactId>
-
 		</dependency>
 		<dependency>
-
 			<groupId>org.springframework</groupId>
-
 			<artifactId>spring-context</artifactId>
-
 		</dependency>
-
 		<!-- Common DBCP2 connection pool -->
-
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
-
 		<dependency>
-
 			<groupId>org.apache.commons</groupId>
-
 			<artifactId>commons-dbcp2</artifactId>
-
 			<version>2.5.0</version>
-
 		</dependency>
 		<dependency>
-
 			<groupId>org.postgresql</groupId>
-
 			<artifactId>postgresql</artifactId>
-
 			<version>42.2.5</version>
-
 		</dependency>
 		<dependency>
-
 			<groupId>org.mockito</groupId>
-
 			<artifactId>mockito-all</artifactId>
-
 			<version>2.0.2-beta</version>
-
 			<scope>test</scope>
-
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
-
 		<dependency>
-
 			<groupId>junit</groupId>
-
 			<artifactId>junit</artifactId>
-
 			<scope>test</scope>
-
 		</dependency>
-
 		<dependency>
-
 			<groupId>org.springframework.boot</groupId>
-
 			<artifactId>spring-boot-starter-test</artifactId>
-
 			<scope>test</scope>
-
 		</dependency>
-
-		
-
 		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-bom -->
-
 		<dependency>
-
     		<groupId>com.amazonaws</groupId>
-
     		<artifactId>aws-java-sdk-bom</artifactId>
-
     		<version>1.11.683</version>
-
     		<type>pom</type>
-
 		</dependency>
-
-		
-
 		<dependency>
-
   			<groupId>com.amazonaws</groupId>
-
   			<artifactId>amazon-sqs-java-messaging-lib</artifactId>
-
   			<version>1.0.4</version>
-
   			<type>jar</type>
-
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
-
+		<dependency>
+    		<groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt-api</artifactId>
+    		<version>0.10.7</version>
+		</dependency>
+		<dependency>
+    		<groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt-impl</artifactId>
+    		<version>0.10.7</version>
+    		<scope>runtime</scope>
+		</dependency>
+		<dependency>
+    		<groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt-jackson</artifactId>
+    		<version>0.10.7</version>
+    		<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 	<!-- Package as an executable jar -->
-
 	<build>
-
 		<plugins>
-
 			<plugin>
-
 				<groupId>org.springframework.boot</groupId>
-
 				<artifactId>spring-boot-maven-plugin</artifactId>
-
 			</plugin>
-
 		</plugins>
-
 	</build>
 	<!-- Add Spring repositories -->
-
 	<!-- (you don't need this if you are using a .RELEASE version) -->
-
 	<repositories>
-
 		<repository>
-
 			<id>spring-snapshots</id>
-
 			<url>https://repo.spring.io/snapshot</url>
-
 			<snapshots>
-
 				<enabled>true</enabled>
-
 			</snapshots>
-
 		</repository>
-
 		<repository>
-
 			<id>spring-milestones</id>
-
 			<url>https://repo.spring.io/milestone</url>
-
 		</repository>
-
 	</repositories>
-
 	<pluginRepositories>
-
 		<pluginRepository>
-
 			<id>spring-snapshots</id>
-
 			<url>https://repo.spring.io/snapshot</url>
-
 		</pluginRepository>
-
 		<pluginRepository>
-
 			<id>spring-milestones</id>
-
 			<url>https://repo.spring.io/milestone</url>
-
 		</pluginRepository>
-
 	</pluginRepositories>
-
 </project>
-
