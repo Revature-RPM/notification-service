@@ -16,8 +16,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -34,12 +37,20 @@ public class ServiceTest {
 	@Mock
 	NotificationRepository mockNotificationRepository;
 
+	Page<Comment> pagedResponse;
+	
 	@InjectMocks
 	private NotificationService notificationService;
 
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
+	}
+	
+	@Before
+	public void initPaganation() {
+		List<Comment> comments = new ArrayList<>();
+		
 	}
 
 	@Test
@@ -119,6 +130,7 @@ public class ServiceTest {
 		}
 	}
 	*/
+	
 	//Test #2 Returns 5 read notifications
 	@Test
 	public void getAllIsReadTrue(){
