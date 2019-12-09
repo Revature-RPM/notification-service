@@ -94,7 +94,7 @@ public class ServiceTest {
 		readDTO.setNotification_id(1);
 		readDTO.setUser_id(1);
 		when(mockNotificationRepository.findById(1)).thenReturn(Optional.empty());
-		Boolean returnValue = notificationService.updateUnreadToRead(readDTO);
+		Boolean returnValue = notificationService.updateReadToUnread(readDTO);
 		fail("Exception should have been thrown due to empty optional");
 	}
 	@Test(expected = HttpClientErrorException.class)
@@ -105,7 +105,7 @@ public class ServiceTest {
 		Comment comment = new Comment();
 		comment.setUserId(2);
 		when(mockNotificationRepository.findById(1)).thenReturn(Optional.of(comment));
-		Boolean returnValue = notificationService.updateUnreadToRead(readDTO);
+		Boolean returnValue = notificationService.updateReadToUnread(readDTO);
 		fail("Exception should have been thrown due to readDTO user not matching user listed on returned notification");
 	}
 	//Create tests for the Get: "/" methods
