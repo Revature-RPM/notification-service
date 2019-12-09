@@ -48,7 +48,7 @@ public class ServiceTest {
 		Comment comment = new Comment();
 		comment.setUserId(1);
 		when(mockNotificationRepository.findById(1)).thenReturn(Optional.of(comment));
-		Boolean returnValue = notificationService.updateUnreadToRead(readDTO);
+		Boolean returnValue = notificationService.updateUnreadToRead(1, readDTO);
 		assertSame("The Notification Repository returns true on success with setReadToTrue", true, returnValue);
 		assertSame("The value of isRead on comment should be true",true,comment.isRead());
 		verify(mockNotificationRepository).findById(1);
@@ -60,18 +60,29 @@ public class ServiceTest {
 		readDTO.setNotification_id(1);
 		readDTO.setUser_id(1);
 		when(mockNotificationRepository.findById(1)).thenReturn(Optional.empty());
-		Boolean returnValue = notificationService.updateUnreadToRead(readDTO);
+		Boolean returnValue = notificationService.updateUnreadToRead(1, readDTO);
 		fail("Exception should have been thrown due to empty optional");
 	}
 	@Test(expected = HttpClientErrorException.class)
-	public void readForbiddenPath() throws Exception {
+	public void readFirstForbiddenPath() throws Exception {
 		ReadDTO readDTO = new ReadDTO();
 		readDTO.setNotification_id(1);
 		readDTO.setUser_id(1);
 		Comment comment = new Comment();
 		comment.setUserId(2);
 		when(mockNotificationRepository.findById(1)).thenReturn(Optional.of(comment));
-		Boolean returnValue = notificationService.updateUnreadToRead(readDTO);
+		Boolean returnValue = notificationService.updateUnreadToRead(1,readDTO);
+		fail("Exception should have been thrown due to readDTO user not matching user listed on returned notification");
+	}
+	@Test(expected = HttpClientErrorException.class)
+	public void readSecondForbiddenPath() throws Exception {
+		ReadDTO readDTO = new ReadDTO();
+		readDTO.setNotification_id(1);
+		readDTO.setUser_id(1);
+		Comment comment = new Comment();
+		comment.setUserId(1);
+		when(mockNotificationRepository.findById(1)).thenReturn(Optional.of(comment));
+		Boolean returnValue = notificationService.updateUnreadToRead(2,readDTO);
 		fail("Exception should have been thrown due to readDTO user not matching user listed on returned notification");
 	}
 	@Test
@@ -82,7 +93,7 @@ public class ServiceTest {
 		Comment comment = new Comment();
 		comment.setUserId(1);
 		when(mockNotificationRepository.findById(1)).thenReturn(Optional.of(comment));
-		Boolean returnValue = notificationService.updateReadToUnread(readDTO);
+		Boolean returnValue = notificationService.updateReadToUnread(1,readDTO);
 		assertSame("The Notification Repository returns true on success with setReadToTrue", true, returnValue);
 		assertSame("The value of isRead on comment should be false",false,comment.isRead());
 		verify(mockNotificationRepository).findById(1);
@@ -94,18 +105,29 @@ public class ServiceTest {
 		readDTO.setNotification_id(1);
 		readDTO.setUser_id(1);
 		when(mockNotificationRepository.findById(1)).thenReturn(Optional.empty());
-		Boolean returnValue = notificationService.updateReadToUnread(readDTO);
+		Boolean returnValue = notificationService.updateReadToUnread(1,readDTO);
 		fail("Exception should have been thrown due to empty optional");
 	}
 	@Test(expected = HttpClientErrorException.class)
-	public void unreadForbiddenPath() throws Exception {
+	public void unreadFirstForbiddenPath() throws Exception {
 		ReadDTO readDTO = new ReadDTO();
 		readDTO.setNotification_id(1);
 		readDTO.setUser_id(1);
 		Comment comment = new Comment();
 		comment.setUserId(2);
 		when(mockNotificationRepository.findById(1)).thenReturn(Optional.of(comment));
-		Boolean returnValue = notificationService.updateReadToUnread(readDTO);
+		Boolean returnValue = notificationService.updateReadToUnread(1,readDTO);
+		fail("Exception should have been thrown due to readDTO user not matching user listed on returned notification");
+	}
+	@Test(expected = HttpClientErrorException.class)
+	public void unreadSecondForbiddenPath() throws Exception {
+		ReadDTO readDTO = new ReadDTO();
+		readDTO.setNotification_id(1);
+		readDTO.setUser_id(1);
+		Comment comment = new Comment();
+		comment.setUserId(1);
+		when(mockNotificationRepository.findById(1)).thenReturn(Optional.of(comment));
+		Boolean returnValue = notificationService.updateReadToUnread(2,readDTO);
 		fail("Exception should have been thrown due to readDTO user not matching user listed on returned notification");
 	}
 	//Create tests for the Get: "/" methods
