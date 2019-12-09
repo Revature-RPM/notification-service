@@ -67,23 +67,23 @@ public class NotificationService {
 	 * @param page
 	 * @return
 	 */
-	public Page<Comment> getNotificationsByPage(Pageable page) {
-		return notificationRepository.findAllByOrderByDateCreatedDesc(page);
+	public Page<Comment> getNotificationsByPage(int userid,Pageable page) {
+		return notificationRepository.findByUserId(userid, page);
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Comment> getAllNewNotifications() {
+	public List<Comment> getAllNewNotifications(int userid) {
 		//Creating a list with notifications that are not read
-		List<Comment> newNotifications =  notificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc();
+		List<Comment> newNotifications =  notificationRepository.getNotificationsByUserIdAndIsReadFalse(userid);
 		
 		if (newNotifications.size() < 5) {
 			final int numNeeded = 5 - newNotifications.size();
 			System.out.println(numNeeded);
 			//Creating a list with notification that are read
-			List<Comment> fillerNotifications = notificationRepository.getTop5NotifcationsByIsReadTrueOrderByDateCreatedDesc();
+			List<Comment> fillerNotifications = notificationRepository.getTop5NotificationsByUserIdAndIsReadTrue(userid);
 			System.out.println(fillerNotifications);
 			
 			for(int i = 0; i < numNeeded; i++) {

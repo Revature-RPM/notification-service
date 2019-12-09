@@ -21,16 +21,16 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	 * @param page
 	 * @return
 	 */
-	Page<Comment> findAllByOrderByDateCreatedDesc(Pageable page);
+	Page<Comment> findByUserId(int userid, Pageable page);
 
 	/**
 	 * 
 	 * @return
 	 */
-	List<Comment> getNotificationsByIsReadFalseOrderByDateCreatedDesc();
+	List<Comment> getNotificationsByUserIdAndIsReadFalse(int userid);
 
 
-	List<Comment> getTop5NotifcationsByIsReadTrueOrderByDateCreatedDesc();
+	List<Comment> getTop5NotificationsByUserIdAndIsReadTrue(int userid);
 	
 
 	
