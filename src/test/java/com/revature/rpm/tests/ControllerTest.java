@@ -107,6 +107,52 @@ public class ControllerTest {
 	}
 	
 	@Test
+	public void updateUnreadHappyPath() throws Exception {
+		ReadDTO readDTO = new ReadDTO();
+		readDTO.setNotification_id(1);
+		readDTO.setUser_id(1);
+		when(mockNotificationService
+			.updateReadToUnread(readDTO))
+			.thenReturn(true);
+		this.mockMvc
+			.perform(patch("/unread/")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(om.writeValueAsString(readDTO)))
+			.andExpect(status().is(HttpStatus.OK.value()));
+	}
+	
+	@Test
+	public void updateUnreadNotFound() throws Exception {
+		ReadDTO readDTO = new ReadDTO();
+		readDTO.setNotification_id(1);
+		readDTO.setUser_id(1);
+		when(mockNotificationService
+			.updateReadToUnread(Mockito.any(ReadDTO.class)))
+			.thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
+		this.mockMvc
+			.perform(patch("/unread/")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(om.writeValueAsString(readDTO)))
+			.andDo(print())
+			.andExpect(status().is(HttpStatus.NOT_FOUND.value()));
+	}
+	
+	@Test
+	public void updateUnreadPermissionDenied() throws Exception {
+		ReadDTO readDTO = new ReadDTO();
+		readDTO.setNotification_id(1);
+		readDTO.setUser_id(1);
+		when(mockNotificationService
+			.updateReadToUnread(Mockito.any(ReadDTO.class)))
+			.thenThrow(new HttpClientErrorException(HttpStatus.FORBIDDEN));
+		this.mockMvc
+			.perform(patch("/unread/")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(om.writeValueAsString(readDTO)))
+			.andExpect(status().is(HttpStatus.FORBIDDEN.value()));
+	}
+	
+	@Test
 	public void getAllByOrderByDate() throws Exception {
 		
 	}
