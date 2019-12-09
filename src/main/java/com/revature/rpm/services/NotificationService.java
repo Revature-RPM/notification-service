@@ -42,6 +42,20 @@ public class NotificationService {
 		return true;
 		
 	}
+	@Transactional
+	public Boolean updateReadToUnread(ReadDTO readDTO) {
+		int notificationId = readDTO.getNotification_id();
+		
+		int userId = readDTO.getUser_id();
+		
+		Notification notification = notificationRepository.findById(notificationId)
+				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+		if(notification.getUserId()!=userId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
+		notification.setRead(false);
+		notificationRepository.save(notification);
+		return true;
+		
+	}
 
 	/**
 	 * Service to find all
@@ -52,7 +66,7 @@ public class NotificationService {
 	 * @return
 	 */
 	public Page<Comment> getNotificationsByPage(Pageable page) {
-		return notificationRepository.findAllByOrderByDateCreated(page);
+		return notificationRepository.findAllByOrderByDateCreatedDesc(page);
 	}
 	
 	/**
