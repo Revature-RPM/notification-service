@@ -3,7 +3,15 @@ package com.revature.rpm.entities;
 import java.util.Date;
 
 import javax.persistence.*;
-
+/**
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ *
+ */
 @Entity
 @DiscriminatorColumn(name = "Content_Type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
