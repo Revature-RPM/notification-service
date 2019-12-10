@@ -61,7 +61,7 @@ public class Comment extends Notification{
 
 	@Override
 	public String toString() {
-		return "Comment ["+ super.toString()+" shortDescription=" + shortDescription + ", fullDescription=" + fullDescription + "]";
+		return "Comment [shortDescription=" + shortDescription + ", fullDescription=" + fullDescription + "]";
 	}
 
 	public Comment(String shortDescription, String fullDescription) {
