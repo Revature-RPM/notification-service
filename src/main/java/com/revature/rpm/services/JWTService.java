@@ -1,12 +1,9 @@
 package com.revature.rpm.services;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import javax.crypto.SecretKey;
 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
@@ -24,11 +21,19 @@ import io.jsonwebtoken.security.Keys;
  *
  */
 @Service
-public class JWTService {
+public class JWTService implements InitializingBean{
 	byte[] secretBytes;
+	
+	@Value("${JWT_SECRET:jwtsecret-reallylongsecretrequired}")
+	String secret;
 	
 	public JWTService() {
 		super();
+	}
+	
+	// afterPropertiesSet is the appropriate place to initialize them
+	@Override
+	public void afterPropertiesSet() throws Exception {
 		secretBytes = getSecretBytes();
 	}
 	
@@ -37,14 +42,7 @@ public class JWTService {
 	 * @return
 	 */
 	private byte[] getSecretBytes() {
-		try {
-			Path path = Paths.get(System.getenv("JWT_SECRET"));
-			return Files.readAllBytes(path);
-		} catch (IOException e) {
-			System.out.println("JWT Secret Read Error!");
-			e.printStackTrace();
-			return null;
-		}
+		return secret.getBytes();
 	}
 	
 	/**

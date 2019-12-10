@@ -60,7 +60,10 @@ public class Controller {
 	 */
 	@GetMapping("/")
 	public List<Comment> getAllNewNotifications(@RequestHeader("Authorization") String jws) {
+		System.out.println("Started GET...");
+		System.out.println(jws);
 		int userid = jwtserv.extractUserIdFromJWT(jws);
+		System.out.println(userid);
 		System.out.println("Getting notifications for userid: " + userid + "...");
 		return notificationService.getAllNewNotifications(userid);
 	}

@@ -27,7 +27,6 @@ import com.revature.rpm.services.AdapterService;
 import com.revature.rpm.services.NotificationService;
 
 @Component
-@ConditionalOnBean(NotificationRepository.class)
 public class Listener implements InitializingBean {
 
 	// Injecting environment variable data into strings
