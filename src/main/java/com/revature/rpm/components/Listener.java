@@ -7,6 +7,7 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,10 +22,12 @@ import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.rpm.dto.SQSDTO;
 import com.revature.rpm.entities.Comment;
+import com.revature.rpm.repositories.NotificationRepository;
 import com.revature.rpm.services.AdapterService;
 import com.revature.rpm.services.NotificationService;
 
 @Component
+@ConditionalOnBean(NotificationRepository.class)
 public class Listener implements InitializingBean {
 
 	// Injecting environment variable data into strings

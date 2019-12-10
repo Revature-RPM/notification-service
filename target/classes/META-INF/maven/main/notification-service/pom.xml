@@ -5,7 +5,7 @@
   <groupId>main</groupId>
   <artifactId>notification-service</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>HIBERNATE - ${project.artifactId}</name>
+  <name>${project.artifactId}</name>
     <url>https://memorynotfound.com</url>
     <parent>
 		<groupId>org.springframework.boot</groupId>
@@ -65,6 +65,7 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.2.5</version>
 		</dependency>
+		<!-- Testing Dependencies -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
@@ -81,6 +82,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+    		<groupId>com.h2database</groupId>
+    		<artifactId>h2</artifactId>
+    		<version>1.4.197</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-test</artifactId>
+    		<version>2.1.3.RELEASE</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-bom -->
 		<dependency>
