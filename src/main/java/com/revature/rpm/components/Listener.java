@@ -19,7 +19,9 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.rpm.dto.SQSDTO;
 import com.revature.rpm.entities.Comment;
+import com.revature.rpm.services.AdapterService;
 import com.revature.rpm.services.NotificationService;
 
 @Component
@@ -45,6 +47,9 @@ public class Listener implements InitializingBean {
 	@Autowired
 	NotificationService notificationService;
 	
+	@Autowired
+	AdapterService adapterService;
+	
 	Logger logger = Logger.getLogger(Listener.class);
 
 	private BasicAWSCredentials credentials;
@@ -69,20 +74,29 @@ public class Listener implements InitializingBean {
 		
 		messages.forEach(message -> {
 			String body = message.getBody();
-			Comment comment = null;
+			SQSDTO dto = null;
+//			Notification notification = null;
 			
 			try {
-				comment = objectMapper.readValue(body, Comment.class);
+				dto = objectMapper.readValue(body, SQSDTO.class);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		
 			//logger method to log incoming Notification
-			logger.info("Received notification request: " + comment.getTitle() + " with project ID: " + comment.getProjectId());
+			logger.info("Received notification request: " + dto.getTitle() + " with project ID: " + dto.getProjectId());
 			
-			//Method to insert Notification
-			notificationService.save(comment);
-			deleteMessage(message.getReceiptHandle());
+			//Cast DTO into appropriate entity, then save it
+			/*
+			 * AdapterService should be updated to accept a SQSDTO and output the appropriate object type in the future
+			 * At the moment, the notificiation type is determined here.
+			*/
+			if(dto.getContentType().equals("Comment")) {
+				Comment comment = adapterService.parseComment(dto);
+				notificationService.save(comment);
+				deleteMessage(message.getReceiptHandle());
+			} 
+
 			
 		});
 	}
