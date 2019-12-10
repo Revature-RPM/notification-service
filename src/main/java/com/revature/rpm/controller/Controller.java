@@ -16,7 +16,17 @@ import com.revature.rpm.dto.ReadDTO;
 import com.revature.rpm.entities.Comment;
 import com.revature.rpm.services.JWTService;
 import com.revature.rpm.services.NotificationService;
-
+/**
+ * 
+ * Notifications controller class which receives the mapping "" and perform 
+ * either our GET "/", GET "/history?page=n", or PATCH "/" requests.
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ */
 @RestController
 @RequestMapping("")
 public class Controller {
@@ -24,6 +34,13 @@ public class Controller {
 	NotificationService notificationService;
 	JWTService jwtserv;
 	
+	/**
+	 * Constructor to take in the parameters of our notification service and our 
+	 * JWT service. 
+	 * 
+	 * @param notificationService
+	 * @param jwtserv
+	 */
 	@Autowired
 	public Controller(NotificationService notificationService, JWTService jwtserv) {
 		super();
@@ -31,30 +48,38 @@ public class Controller {
 		this.jwtserv = jwtserv;
 	}
 	
+	/** 
+	 * Controller level method to get all of the new notifications 
+	 * @param jws
+	 * @return
+	 */
 	@GetMapping("/")
 	public List<Comment> getAllNewNotifications(@RequestHeader("Authorization") String jws) {
 		int userid = jwtserv.extractUserIdFromJWT(jws);
 		System.out.println("Getting notifications for userid: " + userid + "...");
-		return notificationService.getAllNewNotifications();
+		return notificationService.getAllNewNotifications(userid);
 	}
 	
 	@GetMapping("/history")
 	public Page<Comment> getNotificationsByPage(@RequestHeader("Authorization") String jws, Pageable page) {
 		int userid = jwtserv.extractUserIdFromJWT(jws);
 		System.out.println("Getting pagenated notifications for userid: " + userid + " Page number: " + page + "...");
-		return notificationService.getNotificationsByPage(page);
+		return notificationService.getNotificationsByPage(userid,page);
 	}
 
 	@PatchMapping("/")
 	public Boolean updateRead(@RequestBody ReadDTO readDTO, @RequestHeader("Authorization") String jws) {
-		System.out.println("Updating read status of notificationId: " + readDTO.getNotification_id() + " to read...");
-		notificationService.updateUnreadToRead(readDTO);
+		//System.out.println("Updating read status of notificationId: " + readDTO.getNotification_id() + " to read...");
+		int userid = jwtserv.extractUserIdFromJWT(jws);
+		notificationService.updateUnreadToRead(userid,readDTO);
 		return true;
 	}
 	@PatchMapping("/unread/")
 	public Boolean updateUnread(@RequestBody ReadDTO readDTO, @RequestHeader("Authorization") String jws) {
-		System.out.println("Updating read status of notificationId: " + readDTO.getNotification_id() + " to unread...");
-		notificationService.updateReadToUnread(readDTO);
+		//System.out.println("Updating read status of notificationId: " + readDTO.getNotification_id() + " to unread...");
+		//System.out.println(jwtserv);
+		int userid = jwtserv.extractUserIdFromJWT(jws);
+		notificationService.updateReadToUnread(userid, readDTO);
 		return true;
 	}
 }

@@ -17,6 +17,15 @@ import com.revature.rpm.entities.Comment;
 import com.revature.rpm.entities.Notification;
 import com.revature.rpm.repositories.NotificationRepository;
 
+/**
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ *
+ */
 @Service
 public class NotificationService {
 	
@@ -27,9 +36,9 @@ public class NotificationService {
 		super();
 		this.notificationRepository = notificationRepository;
 	}
-	
+
 	@Transactional
-	public Boolean updateUnreadToRead(ReadDTO readDTO) {
+	public Boolean updateUnreadToRead(int jwtUserId, ReadDTO readDTO) {
 		int notificationId = readDTO.getNotification_id();
 		
 		int userId = readDTO.getUser_id();
@@ -37,13 +46,14 @@ public class NotificationService {
 		Notification notification = notificationRepository.findById(notificationId)
 				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
 		if(notification.getUserId()!=userId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
+		if(notification.getUserId()!=jwtUserId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
 		notification.setRead(true);
 		notificationRepository.save(notification);
 		return true;
-		
 	}
+
 	@Transactional
-	public Boolean updateReadToUnread(ReadDTO readDTO) {
+	public Boolean updateReadToUnread(int jwtUserId, ReadDTO readDTO) {
 		int notificationId = readDTO.getNotification_id();
 		
 		int userId = readDTO.getUser_id();
@@ -51,44 +61,32 @@ public class NotificationService {
 		Notification notification = notificationRepository.findById(notificationId)
 				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
 		if(notification.getUserId()!=userId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
+		if(notification.getUserId()!=jwtUserId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
 		notification.setRead(false);
 		notificationRepository.save(notification);
 		return true;
-		
 	}
 
-	/**
-	 * Service to find all
-	 * Page is given from Control
-	 * Return page by date
-	 * 
-	 * @param page
-	 * @return
-	 */
-	public Page<Comment> getNotificationsByPage(Pageable page) {
-		return notificationRepository.findAllByOrderByDateCreatedDesc(page);
+	public Page<Comment> getNotificationsByPage(int userid,Pageable page) {
+		return notificationRepository.findByUserIdOrderByDateCreatedDesc(userid, page);
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public List<Comment> getAllNewNotifications() {
+	public List<Comment> getAllNewNotifications(int userid) {
 		//Creating a list with notifications that are not read
-		List<Comment> newNotifications =  notificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc();
+		List<Comment> newNotifications =  notificationRepository.getNotificationsByUserIdAndIsReadFalseOrderByDateCreatedDesc(userid);
 		
 		if (newNotifications.size() < 5) {
 			final int numNeeded = 5 - newNotifications.size();
 			System.out.println(numNeeded);
 			//Creating a list with notification that are read
-			List<Comment> fillerNotifications = notificationRepository.getTop5NotifcationsByIsReadTrueOrderByDateCreatedDesc();
+			List<Comment> fillerNotifications = notificationRepository.getTop5NotificationsByUserIdAndIsReadTrueOrderByDateCreatedDesc(userid);
 			System.out.println(fillerNotifications);
 			
 			for(int i = 0; i < numNeeded; i++) {
 				newNotifications.add(i, fillerNotifications.get(i));
 			}
 		}
-		
+
 		//sort the whole list by date
 		Collections.sort(newNotifications, (a,b) -> {
 			return a.getDateCreated().compareTo(b.getDateCreated());
