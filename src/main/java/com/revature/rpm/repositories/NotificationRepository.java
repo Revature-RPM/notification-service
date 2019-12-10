@@ -9,7 +9,15 @@ import org.springframework.stereotype.Repository;
 
 import com.revature.rpm.entities.Comment;
 import com.revature.rpm.entities.Notification;
-
+/**
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ *
+ */
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Integer>{
 
@@ -21,14 +29,14 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	 * @param page
 	 * @return
 	 */
-	Page<Comment> findByUserId(Pageable page, int userid);
+	Page<Comment> findByUserIdOrderByDateCreatedDesc(int userid, Pageable page);
 
 	/**
 	 * 
 	 * @return
 	 */
-	List<Comment> getNotificationsByUserIdAndIsReadFalse(int userid);
+	List<Comment> getNotificationsByUserIdAndIsReadFalseOrderByDateCreatedDesc(int userid);
 
-	List<Comment> getTop5NotifcationsByUserIdAndIsReadTrue(int userid);
-	
+
+	List<Comment> getTop5NotificationsByUserIdAndIsReadTrueOrderByDateCreatedDesc(int userid);	
 }

@@ -14,7 +14,15 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-
+/**
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ *
+ */
 @Service
 public class JWTService {
 	byte[] secretBytes;
@@ -31,7 +39,6 @@ public class JWTService {
 	private byte[] getSecretBytes() {
 		try {
 			Path path = Paths.get(System.getenv("JWT_SECRET"));
-			System.out.println(Files.readAllBytes(path));
 			return Files.readAllBytes(path);
 		} catch (IOException e) {
 			System.out.println("JWT Secret Read Error!");
@@ -51,16 +58,10 @@ public class JWTService {
 	
 	public Integer extractUserIdFromJWT(String jwsString) {
 		try {
-			System.out.println("extractUserIdFromJWT try block running");
-			System.out.println("JWS String : " + jwsString);
-			System.out.println(Jwts.parser().setSigningKey(getSecret()));
-			
 			Jws<Claims> jwsclaims = Jwts.parser()        
 					.setSigningKey(getSecret())         
 					.parseClaimsJws(jwsString);
-			System.out.println("JWS<Claims> parsed");
 			String userid = jwsclaims.getBody().get("sub", String.class);
-			System.out.println("User ID : " + userid);
 			return Integer.parseInt(userid);
 		} catch (JwtException ex) {     
 			System.out.println("JWT Authentication failure...");
