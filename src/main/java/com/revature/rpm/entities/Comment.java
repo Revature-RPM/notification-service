@@ -1,7 +1,15 @@
 package com.revature.rpm.entities;
 
 import javax.persistence.*;
-
+/**
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ *
+ */
 @Entity
 @DiscriminatorValue(value = "Comment")
 public class Comment extends Notification{

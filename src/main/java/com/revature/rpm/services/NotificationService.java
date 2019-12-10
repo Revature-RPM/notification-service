@@ -17,6 +17,15 @@ import com.revature.rpm.entities.Comment;
 import com.revature.rpm.entities.Notification;
 import com.revature.rpm.repositories.NotificationRepository;
 
+/**
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ *
+ */
 @Service
 public class NotificationService {
 	
@@ -59,22 +68,10 @@ public class NotificationService {
 		
 	}
 
-	/**
-	 * Service to find all
-	 * Page is given from Control
-	 * Return page by date
-	 * 
-	 * @param page
-	 * @return
-	 */
 	public Page<Comment> getNotificationsByPage(int userid,Pageable page) {
 		return notificationRepository.findByUserIdOrderByDateCreatedDesc(userid, page);
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public List<Comment> getAllNewNotifications(int userid) {
 		//Creating a list with notifications that are not read
 		List<Comment> newNotifications =  notificationRepository.getNotificationsByUserIdAndIsReadFalseOrderByDateCreatedDesc(userid);

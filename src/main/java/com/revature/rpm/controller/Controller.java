@@ -16,7 +16,15 @@ import com.revature.rpm.dto.ReadDTO;
 import com.revature.rpm.entities.Comment;
 import com.revature.rpm.services.JWTService;
 import com.revature.rpm.services.NotificationService;
-
+/**
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ *
+ */
 @RestController
 @RequestMapping("")
 public class Controller {

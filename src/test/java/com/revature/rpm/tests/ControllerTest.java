@@ -37,7 +37,15 @@ import com.revature.rpm.dto.ReadDTO;
 import com.revature.rpm.entities.Notification;
 import com.revature.rpm.services.JWTService;
 import com.revature.rpm.services.NotificationService;
-
+/**
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -140,6 +148,7 @@ public class ControllerTest {
 			.thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
 		this.mockMvc
 			.perform(patch("/unread/")
+			//JWT valid one week from 12/9/2019
 			.header("Authorization", "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJSZXZhdHVyZSIsInN1YiI6IjEiLCJpYXQiOjE1NzU5MTQ4NjMsImV4cCI6MTU3NjUxOTY2MywidXNlcklkIjoxfQ.wgdEB-shuiunIn-ihoDDpag4oxvK8ohNBOtHUJOMUU83qWsOLzC3WV5S_9icgjBF5tNH8t15iXqWrw3SYb_Vzw")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(om.writeValueAsString(readDTO)))
@@ -157,6 +166,7 @@ public class ControllerTest {
 			.thenThrow(new HttpClientErrorException(HttpStatus.FORBIDDEN));
 		this.mockMvc
 			.perform(patch("/unread/")
+			//JWT valid one week from 12/9/2019
 			.header("Authorization", "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJSZXZhdHVyZSIsInN1YiI6IjEiLCJpYXQiOjE1NzU5MTQ4NjMsImV4cCI6MTU3NjUxOTY2MywidXNlcklkIjoxfQ.wgdEB-shuiunIn-ihoDDpag4oxvK8ohNBOtHUJOMUU83qWsOLzC3WV5S_9icgjBF5tNH8t15iXqWrw3SYb_Vzw")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(om.writeValueAsString(readDTO)))

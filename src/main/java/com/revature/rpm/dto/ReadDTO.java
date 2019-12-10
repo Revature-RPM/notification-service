@@ -1,5 +1,13 @@
 package com.revature.rpm.dto;
-
+/**
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ *
+ */
 public class ReadDTO {
 	
 	private int notification_id;

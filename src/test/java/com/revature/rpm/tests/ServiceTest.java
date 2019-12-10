@@ -24,6 +24,15 @@ import com.revature.rpm.dto.ReadDTO;
 import com.revature.rpm.entities.Comment;
 import com.revature.rpm.repositories.NotificationRepository;
 import com.revature.rpm.services.NotificationService;
+/**
+ * 
+ * @author James Meadows
+ * @author Stefano Georges
+ * @author Chong Ting
+ * @author Christopher Troll
+ * @author Emad Davis
+ *
+ */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -156,9 +165,9 @@ public class ServiceTest {
 			mockList.add(note);
 		}
 		//Stubbing the getNotificationsByIsReadFalseOrderByDateCreatedDesc() method
-		when(mockNotificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc()).thenReturn(mockList);
+		when(mockNotificationRepository.getNotificationsByUserIdAndIsReadFalseOrderByDateCreatedDesc(1)).thenReturn(mockList);
 		//Test the getAllNewNotifications() method
-		List<Comment> returnedList=notificationService.getAllNewNotifications();
+		List<Comment> returnedList=notificationService.getAllNewNotifications(1);
 		//Verify the results
 		for(int i = 0; i < returnedList.size(); i++) {
 			//verify the is_read = false
@@ -197,9 +206,9 @@ public class ServiceTest {
 			mockList.add(note);
 		}
 		//Stubbing the getNotificationsByIsReadFalseOrderByDateCreatedDesc() method
-		when(mockNotificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc()).thenReturn(mockList);
+		when(mockNotificationRepository.getNotificationsByUserIdAndIsReadFalseOrderByDateCreatedDesc(1)).thenReturn(mockList);
 		//Test the getAllNewNotifications() method
-		List<Comment> returnedList=notificationService.getAllNewNotifications();
+		List<Comment> returnedList=notificationService.getAllNewNotifications(1);
 		//Verify the results
 		for(int i = 0; i < returnedList.size(); i++) {
 			//verify the is_read = false
@@ -242,9 +251,9 @@ public class ServiceTest {
 			mockList.add(note);
 		}
 		//Stubbing the getNotificationsByIsReadFalseOrderByDateCreatedDesc() method
-		when(mockNotificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc()).thenReturn(mockList);
+		when(mockNotificationRepository.getNotificationsByUserIdAndIsReadFalseOrderByDateCreatedDesc(1)).thenReturn(mockList);
 		//Test the getAllNewNotifications() method
-		List<Comment> returnedList=notificationService.getAllNewNotifications();
+		List<Comment> returnedList=notificationService.getAllNewNotifications(1);
 		//Verify the results
 		int falseCount = 0;
 		int trueCount = 0;
@@ -295,9 +304,9 @@ public class ServiceTest {
 			mockList.add(note);
 		}
 		//Stubbing the getNotificationsByIsReadFalseOrderByDateCreatedDesc() method
-		when(mockNotificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc()).thenReturn(mockList);
+		when(mockNotificationRepository.getNotificationsByUserIdAndIsReadFalseOrderByDateCreatedDesc(1)).thenReturn(mockList);
 		//Test the getAllNewNotifications() method
-		List<Comment> returnedList=notificationService.getAllNewNotifications();
+		List<Comment> returnedList=notificationService.getAllNewNotifications(1);
 		//Verify the results
 		int falseCount = 0;
 		int trueCount = 0;
@@ -347,9 +356,9 @@ public class ServiceTest {
 			mockList.add(note);
 		}
 		//Stubbing the getNotificationsByIsReadFalseOrderByDateCreatedDesc() method
-		when(mockNotificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc()).thenReturn(mockList);
+		when(mockNotificationRepository.getNotificationsByUserIdAndIsReadFalseOrderByDateCreatedDesc(1)).thenReturn(mockList);
 		//Test the getAllNewNotifications() method
-		List<Comment> returnedList=notificationService.getAllNewNotifications();
+		List<Comment> returnedList=notificationService.getAllNewNotifications(1);
 		//Verify the results
 		int falseCount = 0;
 		int trueCount = 0;
@@ -399,9 +408,9 @@ public class ServiceTest {
 			mockList.add(note);
 		}
 		//Stubbing the getNotificationsByIsReadFalseOrderByDateCreatedDesc() method
-		when(mockNotificationRepository.getNotificationsByIsReadFalseOrderByDateCreatedDesc()).thenReturn(mockList);
+		when(mockNotificationRepository.getNotificationsByUserIdAndIsReadFalseOrderByDateCreatedDesc(1)).thenReturn(mockList);
 		//Test the getAllNewNotifications() method
-		List<Comment> returnedList=notificationService.getAllNewNotifications();
+		List<Comment> returnedList=notificationService.getAllNewNotifications(1);
 		//Verify the results
 		int falseCount = 0;
 		int trueCount = 0;
