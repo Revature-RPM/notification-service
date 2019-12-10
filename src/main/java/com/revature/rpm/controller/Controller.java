@@ -18,12 +18,14 @@ import com.revature.rpm.services.JWTService;
 import com.revature.rpm.services.NotificationService;
 /**
  * 
+ * Notifications controller class which receives the mapping "" and perform 
+ * either our GET "/", GET "/history?page=n", or PATCH "/" requests.
+ * 
  * @author James Meadows
  * @author Stefano Georges
  * @author Chong Ting
  * @author Christopher Troll
  * @author Emad Davis
- *
  */
 @RestController
 @RequestMapping("")
@@ -32,6 +34,13 @@ public class Controller {
 	NotificationService notificationService;
 	JWTService jwtserv;
 	
+	/**
+	 * Constructor to take in the parameters of our notification service and our 
+	 * JWT service. 
+	 * 
+	 * @param notificationService
+	 * @param jwtserv
+	 */
 	@Autowired
 	public Controller(NotificationService notificationService, JWTService jwtserv) {
 		super();
@@ -39,6 +48,11 @@ public class Controller {
 		this.jwtserv = jwtserv;
 	}
 	
+	/** 
+	 * Controller level method to get all of the new notifications 
+	 * @param jws
+	 * @return
+	 */
 	@GetMapping("/")
 	public List<Comment> getAllNewNotifications(@RequestHeader("Authorization") String jws) {
 		int userid = jwtserv.extractUserIdFromJWT(jws);
