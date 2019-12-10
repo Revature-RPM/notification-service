@@ -38,8 +38,5 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	List<Comment> getNotificationsByUserIdAndIsReadFalseOrderByDateCreatedDesc(int userid);
 
 
-	List<Comment> getTop5NotificationsByUserIdAndIsReadTrueOrderByDateCreatedDesc(int userid);
-	
-
-	
+	List<Comment> getTop5NotificationsByUserIdAndIsReadTrueOrderByDateCreatedDesc(int userid);	
 }

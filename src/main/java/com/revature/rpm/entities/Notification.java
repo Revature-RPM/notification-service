@@ -10,7 +10,6 @@ import javax.persistence.*;
  * @author Chong Ting
  * @author Christopher Troll
  * @author Emad Davis
- *
  */
 @Entity
 @DiscriminatorColumn(name = "Content_Type")
@@ -23,7 +22,7 @@ public abstract class Notification {
 	private int notificationId;
 	
 	@Column(name = "project_id")
-	private int projectId;
+	private String projectId;
 
 	@Column(name = "user_id")
 	private int userId;
@@ -47,11 +46,11 @@ public abstract class Notification {
 		this.notificationId = notificationId;
 	}
 
-	public int getProjectId() {
+	public String getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(int projectId) {
+	public void setProjectId(String projectId) {
 		this.projectId = projectId;
 	}
 
@@ -94,7 +93,7 @@ public abstract class Notification {
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
 		result = prime * result + (isRead ? 1231 : 1237);
 		result = prime * result + notificationId;
-		result = prime * result + projectId;
+		result = prime * result + ((projectId == null) ? 0 : projectId.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + userId;
 		return result;
@@ -118,7 +117,10 @@ public abstract class Notification {
 			return false;
 		if (notificationId != other.notificationId)
 			return false;
-		if (projectId != other.projectId)
+		if (projectId == null) {
+			if (other.projectId != null)
+				return false;
+		} else if (!projectId.equals(other.projectId))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -136,7 +138,8 @@ public abstract class Notification {
 				+ ", title=" + title + ", isRead=" + isRead + ", dateCreated=" + dateCreated + "]";
 	}
 
-	public Notification(int notificationId, int projectId, int userId, String title, boolean isRead, Date dateCreated) {
+	public Notification(int notificationId, String projectId, int userId, String title, boolean isRead,
+			Date dateCreated) {
 		super();
 		this.notificationId = notificationId;
 		this.projectId = projectId;
@@ -149,7 +152,5 @@ public abstract class Notification {
 	public Notification() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	
+	}	
 }

@@ -17,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -31,7 +32,6 @@ import com.revature.rpm.services.NotificationService;
  * @author Chong Ting
  * @author Christopher Troll
  * @author Emad Davis
- *
  */
 
 @RunWith(SpringRunner.class)
@@ -40,13 +40,20 @@ public class ServiceTest {
 	@Mock
 	NotificationRepository mockNotificationRepository;
 
-
+	Page<Comment> pagedResponse;
+	
 	@InjectMocks
 	private NotificationService notificationService;
 
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
+	}
+	
+	@Before
+	public void initPaganation() {
+		List<Comment> comments = new ArrayList<>();
+		
 	}
 
 	@Test
@@ -153,7 +160,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
@@ -194,7 +201,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
@@ -235,7 +242,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
@@ -288,7 +295,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
@@ -340,7 +347,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
@@ -392,7 +399,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");

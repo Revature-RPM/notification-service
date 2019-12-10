@@ -1,13 +1,11 @@
 package com.revature.rpm.tests;
 
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,9 +18,6 @@ import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -34,9 +29,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.advisor.ExceptionHandlerAdvisor;
 import com.revature.rpm.controller.Controller;
 import com.revature.rpm.dto.ReadDTO;
-import com.revature.rpm.entities.Notification;
 import com.revature.rpm.services.JWTService;
 import com.revature.rpm.services.NotificationService;
+
 /**
  * 
  * @author James Meadows
@@ -44,7 +39,6 @@ import com.revature.rpm.services.NotificationService;
  * @author Chong Ting
  * @author Christopher Troll
  * @author Emad Davis
- *
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -55,8 +49,8 @@ public class ControllerTest {
 	
 	@Mock
 	NotificationService mockNotificationService;
-	@Spy
-	JWTService jwtserv;
+	@Mock
+	JWTService mockjwtserv;
 	
 	@InjectMocks
 	private Controller controller;
@@ -81,6 +75,7 @@ public class ControllerTest {
 		when(mockNotificationService
 			.updateUnreadToRead(anyInt(),Mockito.any(ReadDTO.class)))
 			.thenReturn(new Boolean(true));
+		when(mockjwtserv.extractUserIdFromJWT(anyString())).thenReturn(1);
 		this.mockMvc
 			.perform(patch("/")
 			.header("Authorization", "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJSZXZhdHVyZSIsInN1YiI6IjEiLCJpYXQiOjE1NzU5MTQ4NjMsImV4cCI6MTU3NjUxOTY2MywidXNlcklkIjoxfQ.wgdEB-shuiunIn-ihoDDpag4oxvK8ohNBOtHUJOMUU83qWsOLzC3WV5S_9icgjBF5tNH8t15iXqWrw3SYb_Vzw")
@@ -97,6 +92,7 @@ public class ControllerTest {
 		when(mockNotificationService
 			.updateUnreadToRead(anyInt(), Mockito.any(ReadDTO.class)))
 			.thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
+		when(mockjwtserv.extractUserIdFromJWT(anyString())).thenReturn(1);
 		this.mockMvc
 			.perform(patch("/")
 			.header("Authorization", "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJSZXZhdHVyZSIsInN1YiI6IjEiLCJpYXQiOjE1NzU5MTQ4NjMsImV4cCI6MTU3NjUxOTY2MywidXNlcklkIjoxfQ.wgdEB-shuiunIn-ihoDDpag4oxvK8ohNBOtHUJOMUU83qWsOLzC3WV5S_9icgjBF5tNH8t15iXqWrw3SYb_Vzw")
@@ -114,6 +110,7 @@ public class ControllerTest {
 		when(mockNotificationService
 			.updateUnreadToRead(anyInt(),Mockito.any(ReadDTO.class)))
 			.thenThrow(new HttpClientErrorException(HttpStatus.FORBIDDEN));
+		when(mockjwtserv.extractUserIdFromJWT(anyString())).thenReturn(1);
 		this.mockMvc
 			.perform(patch("/")
 			.header("Authorization", "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJSZXZhdHVyZSIsInN1YiI6IjEiLCJpYXQiOjE1NzU5MTQ4NjMsImV4cCI6MTU3NjUxOTY2MywidXNlcklkIjoxfQ.wgdEB-shuiunIn-ihoDDpag4oxvK8ohNBOtHUJOMUU83qWsOLzC3WV5S_9icgjBF5tNH8t15iXqWrw3SYb_Vzw")
@@ -130,6 +127,7 @@ public class ControllerTest {
 		when(mockNotificationService
 			.updateReadToUnread(anyInt(),Mockito.any(ReadDTO.class)))
 			.thenReturn(true);
+		when(mockjwtserv.extractUserIdFromJWT(anyString())).thenReturn(1);
 		this.mockMvc
 			.perform(patch("/unread/")
 			.header("Authorization", "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJSZXZhdHVyZSIsInN1YiI6IjEiLCJpYXQiOjE1NzU5MTQ4NjMsImV4cCI6MTU3NjUxOTY2MywidXNlcklkIjoxfQ.wgdEB-shuiunIn-ihoDDpag4oxvK8ohNBOtHUJOMUU83qWsOLzC3WV5S_9icgjBF5tNH8t15iXqWrw3SYb_Vzw")
@@ -146,6 +144,7 @@ public class ControllerTest {
 		when(mockNotificationService
 			.updateReadToUnread(anyInt(),Mockito.any(ReadDTO.class)))
 			.thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
+		when(mockjwtserv.extractUserIdFromJWT(anyString())).thenReturn(1);
 		this.mockMvc
 			.perform(patch("/unread/")
 			//JWT valid one week from 12/9/2019
@@ -164,6 +163,7 @@ public class ControllerTest {
 		when(mockNotificationService
 			.updateReadToUnread(anyInt(),Mockito.any(ReadDTO.class)))
 			.thenThrow(new HttpClientErrorException(HttpStatus.FORBIDDEN));
+		when(mockjwtserv.extractUserIdFromJWT(anyString())).thenReturn(1);
 		this.mockMvc
 			.perform(patch("/unread/")
 			//JWT valid one week from 12/9/2019

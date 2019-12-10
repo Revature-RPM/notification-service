@@ -52,6 +52,7 @@ public class JWTService {
 	 * @return
 	 */
 	private SecretKey getSecret() {
+		System.out.println("JWT Get Secret Running");
 		return Keys.hmacShaKeyFor(secretBytes);
 	}	
 	
