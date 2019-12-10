@@ -36,7 +36,7 @@ public class NotificationService {
 		super();
 		this.notificationRepository = notificationRepository;
 	}
-	
+
 	@Transactional
 	public Boolean updateUnreadToRead(int jwtUserId, ReadDTO readDTO) {
 		int notificationId = readDTO.getNotification_id();
@@ -50,8 +50,8 @@ public class NotificationService {
 		notification.setRead(true);
 		notificationRepository.save(notification);
 		return true;
-		
 	}
+
 	@Transactional
 	public Boolean updateReadToUnread(int jwtUserId, ReadDTO readDTO) {
 		int notificationId = readDTO.getNotification_id();
@@ -65,7 +65,6 @@ public class NotificationService {
 		notification.setRead(false);
 		notificationRepository.save(notification);
 		return true;
-		
 	}
 
 	public Page<Comment> getNotificationsByPage(int userid,Pageable page) {
@@ -87,7 +86,7 @@ public class NotificationService {
 				newNotifications.add(i, fillerNotifications.get(i));
 			}
 		}
-		
+
 		//sort the whole list by date
 		Collections.sort(newNotifications, (a,b) -> {
 			return a.getDateCreated().compareTo(b.getDateCreated());
