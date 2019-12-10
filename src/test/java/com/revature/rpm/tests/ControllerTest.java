@@ -15,6 +15,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.advisor.ExceptionHandlerAdvisor;
 import com.revature.rpm.controller.Controller;
 import com.revature.rpm.dto.ReadDTO;
+import com.revature.rpm.repositories.NotificationRepository;
 import com.revature.rpm.services.JWTService;
 import com.revature.rpm.services.NotificationService;
 
@@ -40,14 +43,19 @@ import com.revature.rpm.services.NotificationService;
  * @author Emad Davis
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
 @AutoConfigureMockMvc
+@EnableAutoConfiguration(exclude=SecurityAutoConfiguration.class)
+@SpringBootTest
 public class ControllerTest {
 	
 	private MockMvc mockMvc;
 	
 	@Mock
 	NotificationService mockNotificationService;
+	
+	@Mock
+	NotificationRepository mockNotificationRepository;
+	
 	@Spy
 	JWTService jwtserv;
 	
