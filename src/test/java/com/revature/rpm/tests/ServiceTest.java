@@ -160,7 +160,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
@@ -201,7 +201,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
@@ -242,7 +242,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
@@ -295,7 +295,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
@@ -347,7 +347,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
@@ -399,7 +399,7 @@ public class ServiceTest {
 		//Create a mock database
 		for(int i = 0; i < 5; i++) {
 			Comment note = new Comment();
-			note.setProjectId(i);
+			note.setProjectId("irqewjfmifoadji"); // Random string inserted for project_id. 
 			Timestamp rand = new Timestamp(offset +  (long)(Math.random() * diff));
 			note.setDateCreated(rand);
 			note.setFullDescription("mock fullDescription");
