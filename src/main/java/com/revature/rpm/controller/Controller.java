@@ -49,7 +49,12 @@ public class Controller {
 	}
 	
 	/** 
-	 * Controller level method to get all of the new notifications 
+	 * Controller level method to get all of the new notifications matching the userid (stored within jwt). 
+	 * The userid is extracted from the jwt. The notification service class method getAllNewNotifications is
+	 * called passing the userid as a parameter. This method should return a List<Comments> from the database.
+	 * 
+	 * This method returns the List<Comments> from the notifcation service to the in the ResponseBody.
+	 * 
 	 * @param jws
 	 * @return
 	 */
@@ -60,6 +65,12 @@ public class Controller {
 		return notificationService.getAllNewNotifications(userid);
 	}
 	
+	/**
+	 * 
+	 * @param jws
+	 * @param page
+	 * @return
+	 */
 	@GetMapping("/history")
 	public Page<Comment> getNotificationsByPage(@RequestHeader("Authorization") String jws, Pageable page) {
 		int userid = jwtserv.extractUserIdFromJWT(jws);
