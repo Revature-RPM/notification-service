@@ -35,14 +35,14 @@ public class Controller {
 	public List<Comment> getAllNewNotifications(@RequestHeader("Authorization") String jws) {
 		int userid = jwtserv.extractUserIdFromJWT(jws);
 		System.out.println("Getting notifications for userid: " + userid + "...");
-		return notificationService.getAllNewNotifications();
+		return notificationService.getAllNewNotifications(userid);
 	}
 	
 	@GetMapping("/history")
 	public Page<Comment> getNotificationsByPage(@RequestHeader("Authorization") String jws, Pageable page) {
 		int userid = jwtserv.extractUserIdFromJWT(jws);
 		System.out.println("Getting pagenated notifications for userid: " + userid + " Page number: " + page + "...");
-		return notificationService.getNotificationsByPage(page);
+		return notificationService.getNotificationsByPage(userid,page);
 	}
 
 	@PatchMapping("/")
