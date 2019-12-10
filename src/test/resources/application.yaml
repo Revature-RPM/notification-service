@@ -10,5 +10,5 @@ spring:
     password: sa
 security:
   zsign:
-    secret: local-deploy
-    salt: local-deploy
+    secret: ${RPM_ZUUL_ACCESS_HEADER:local-deploy}
+    salt: ${RPM_ZUUL_ACCESS_SALT:local-deploy}
