@@ -19,7 +19,7 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.rpm.entities.Notification;
+import com.revature.rpm.entities.Comment;
 import com.revature.rpm.services.NotificationService;
 
 @Component
@@ -69,19 +69,19 @@ public class Listener implements InitializingBean {
 		
 		messages.forEach(message -> {
 			String body = message.getBody();
-			Notification notification = null;
+			Comment comment = null;
 			
 			try {
-				notification = objectMapper.readValue(body, Notification.class);
+				comment = objectMapper.readValue(body, Comment.class);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		
 			//logger method to log incoming Notification
-			logger.info("Received notification request: " + notification.getTitle() + " with project ID: " + notification.getProjectId());
+			logger.info("Received notification request: " + comment.getTitle() + " with project ID: " + comment.getProjectId());
 			
 			//Method to insert Notification
-			notificationService.save(notification);
+			notificationService.save(comment);
 			deleteMessage(message.getReceiptHandle());
 			
 		});
