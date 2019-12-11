@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: notification-service
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: ctrol
+Built-By: Mitch
 Implementation-Vendor-Id: main
-Build-Jdk: 1.8.0_221
+Build-Jdk: 1.8.0_211
 Implementation-URL: https://memorynotfound.com
 Created-By: Maven Integration for Eclipse
 

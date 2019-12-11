@@ -12,3 +12,5 @@ security:
   zsign:
     secret: ${RPM_ZUUL_ACCESS_HEADER:local-deploy}
     salt: ${RPM_ZUUL_ACCESS_SALT:local-deploy}
+    
+env
