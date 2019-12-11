@@ -75,11 +75,8 @@ public class NotificationService {
 		
 		if (newNotifications.size() < 5) {
 			final int numNeeded = 5 - newNotifications.size();
-			System.out.println(numNeeded);
 			//Creating a list with notification that are read
 			List<Comment> fillerNotifications = notificationRepository.getTop5NotificationsByUserIdAndIsReadTrueOrderByDateCreatedDesc(userid);
-			System.out.println(fillerNotifications);
-			
 			for(int i = 0; i < numNeeded; i++) {
 				newNotifications.add(i, fillerNotifications.get(i));
 			}
