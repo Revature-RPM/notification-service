@@ -78,15 +78,12 @@ public class Controller {
 
 	@PatchMapping("/")
 	public Boolean updateRead(@RequestBody ReadDTO readDTO, @RequestHeader("Authorization") String jws) {
-		//System.out.println("Updating read status of notificationId: " + readDTO.getNotification_id() + " to read...");
 		int userid = jwtserv.extractUserIdFromJWT(jws);
 		notificationService.updateUnreadToRead(userid,readDTO);
 		return true;
 	}
 	@PatchMapping("/unread/")
 	public Boolean updateUnread(@RequestBody ReadDTO readDTO, @RequestHeader("Authorization") String jws) {
-		//System.out.println("Updating read status of notificationId: " + readDTO.getNotification_id() + " to unread...");
-		//System.out.println(jwtserv);
 		int userid = jwtserv.extractUserIdFromJWT(jws);
 		notificationService.updateReadToUnread(userid, readDTO);
 		return true;
