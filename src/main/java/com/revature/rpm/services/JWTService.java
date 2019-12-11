@@ -2,9 +2,12 @@ package com.revature.rpm.services;
 
 import javax.crypto.SecretKey;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.revature.rpm.components.Listener;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -27,6 +30,7 @@ public class JWTService implements InitializingBean{
 	@Value("${JWT_SECRET:jwtsecret-reallylongsecretrequired}")
 	String secret;
 	
+	Logger logger = Logger.getLogger(Listener.class);
 	public JWTService() {
 		super();
 	}
@@ -50,7 +54,6 @@ public class JWTService implements InitializingBean{
 	 * @return
 	 */
 	private SecretKey getSecret() {
-		System.out.println("JWT Get Secret Running");
 		return Keys.hmacShaKeyFor(secretBytes);
 	}	
 	
@@ -62,7 +65,7 @@ public class JWTService implements InitializingBean{
 			String userid = jwsclaims.getBody().get("sub", String.class);
 			return Integer.parseInt(userid);
 		} catch (JwtException ex) {     
-			System.out.println("JWT Authentication failure...");
+			logger.info("JWT Authentication failure...");
 			return null;
 		}
 	}

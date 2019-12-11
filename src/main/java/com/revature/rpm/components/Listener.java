@@ -70,7 +70,6 @@ public class Listener implements InitializingBean {
 	
 	@Scheduled(fixedRate = 15000)
 	private void scheduledPolling() {
-		logger.info("Polling queue ...");
 		ReceiveMessageResult pollResult = getMessages();
 		List<Message> messages = pollResult.getMessages();
 		

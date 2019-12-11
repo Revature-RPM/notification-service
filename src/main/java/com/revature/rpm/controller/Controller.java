@@ -60,11 +60,7 @@ public class Controller {
 	 */
 	@GetMapping("/")
 	public List<Comment> getAllNewNotifications(@RequestHeader("Authorization") String jws) {
-		System.out.println("Started GET...");
-		System.out.println(jws);
 		int userid = jwtserv.extractUserIdFromJWT(jws);
-		System.out.println(userid);
-		System.out.println("Getting notifications for userid: " + userid + "...");
 		return notificationService.getAllNewNotifications(userid);
 	}
 	
@@ -77,7 +73,6 @@ public class Controller {
 	@GetMapping("/history")
 	public Page<Comment> getNotificationsByPage(@RequestHeader("Authorization") String jws, Pageable page) {
 		int userid = jwtserv.extractUserIdFromJWT(jws);
-		System.out.println("Getting pagenated notifications for userid: " + userid + " Page number: " + page + "...");
 		return notificationService.getNotificationsByPage(userid,page);
 	}
 
