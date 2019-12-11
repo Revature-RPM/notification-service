@@ -27,7 +27,6 @@ import com.revature.rpm.services.AdapterService;
 import com.revature.rpm.services.NotificationService;
 
 @Component
-@ConditionalOnBean(NotificationRepository.class)
 public class Listener implements InitializingBean {
 
 	// Injecting environment variable data into strings
@@ -71,7 +70,6 @@ public class Listener implements InitializingBean {
 	
 	@Scheduled(fixedRate = 15000)
 	private void scheduledPolling() {
-		logger.info("Polling queue ...");
 		ReceiveMessageResult pollResult = getMessages();
 		List<Message> messages = pollResult.getMessages();
 		

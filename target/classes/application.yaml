@@ -13,7 +13,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-security:
-  zsign:
-    secret: ${RPM_ZUUL_ACCESS_HEADER}
-    salt: ${RPM_ZUUL_ACCESS_SALT}
+#security:
+#  zsign:
+#    secret: ${RPM_ZUUL_ACCESS_HEADER:local-deploy}
+#    salt: ${RPM_ZUUL_ACCESS_SALT:local-deploy}
