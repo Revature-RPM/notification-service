@@ -40,11 +40,10 @@ public class NotificationService {
 	@Transactional
 	public Boolean updateUnreadToRead(int jwtUserId, ReadDTO readDTO) {
 		int notificationId = readDTO.getNotification_id();
-		
 		int userId = readDTO.getUser_id();
-		
 		Notification notification = notificationRepository.findById(notificationId)
 				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+		//Checks to see if the user is authorized to make changes, errors are thrown if the user is not
 		if(notification.getUserId()!=userId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
 		if(notification.getUserId()!=jwtUserId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
 		notification.setRead(true);
@@ -55,11 +54,10 @@ public class NotificationService {
 	@Transactional
 	public Boolean updateReadToUnread(int jwtUserId, ReadDTO readDTO) {
 		int notificationId = readDTO.getNotification_id();
-		
 		int userId = readDTO.getUser_id();
-		
 		Notification notification = notificationRepository.findById(notificationId)
 				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+		//Checks to see if the user is authorized to make changes, errors are thrown if the user is not
 		if(notification.getUserId()!=userId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
 		if(notification.getUserId()!=jwtUserId)throw new HttpClientErrorException(HttpStatus.FORBIDDEN); 
 		notification.setRead(false);
@@ -77,11 +75,8 @@ public class NotificationService {
 		
 		if (newNotifications.size() < 5) {
 			final int numNeeded = 5 - newNotifications.size();
-			System.out.println(numNeeded);
 			//Creating a list with notification that are read
 			List<Comment> fillerNotifications = notificationRepository.getTop5NotificationsByUserIdAndIsReadTrueOrderByDateCreatedDesc(userid);
-			System.out.println(fillerNotifications);
-			
 			for(int i = 0; i < numNeeded; i++) {
 				newNotifications.add(i, fillerNotifications.get(i));
 			}
