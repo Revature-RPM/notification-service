@@ -7,6 +7,7 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.rpm.dto.SQSDTO;
 import com.revature.rpm.entities.Comment;
+import com.revature.rpm.repositories.NotificationRepository;
 import com.revature.rpm.services.AdapterService;
 import com.revature.rpm.services.NotificationService;
 
@@ -68,7 +70,6 @@ public class Listener implements InitializingBean {
 	
 	@Scheduled(fixedRate = 15000)
 	private void scheduledPolling() {
-		logger.info("Polling queue ...");
 		ReceiveMessageResult pollResult = getMessages();
 		List<Message> messages = pollResult.getMessages();
 		
