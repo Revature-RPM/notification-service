@@ -25,7 +25,8 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: SonarCloud Scan
-      run: git fetch -a
+      run: |
+           git fetch -a
            mvn package
            mvn sonar:sonar
       env:
