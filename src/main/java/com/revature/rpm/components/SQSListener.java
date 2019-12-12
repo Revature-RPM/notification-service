@@ -7,7 +7,7 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -22,12 +22,17 @@ import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.rpm.dto.SQSDTO;
 import com.revature.rpm.entities.Comment;
-import com.revature.rpm.repositories.NotificationRepository;
 import com.revature.rpm.services.AdapterService;
 import com.revature.rpm.services.NotificationService;
 
+/**
+ * Listener pools an AWS SQS Queue for new notifications.
+ * Conditionally disabled when scheduling.enabled is false or undefined to ensure that the Listener
+ * does not throw exceptions during test runs.
+ */
 @Component
-public class Listener implements InitializingBean {
+@ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = false)
+public class SQSListener implements InitializingBean {
 
 	// Injecting environment variable data into strings
 	@Value("${MESSAGING_ACCESS_KEY}")
@@ -52,7 +57,7 @@ public class Listener implements InitializingBean {
 	@Autowired
 	AdapterService adapterService;
 	
-	Logger logger = Logger.getLogger(Listener.class);
+	Logger logger = Logger.getLogger(SQSListener.class);
 
 	private BasicAWSCredentials credentials;
 	private AmazonSQS sqsClient;
