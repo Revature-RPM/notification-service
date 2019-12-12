@@ -28,7 +28,7 @@ jobs:
       run: |
            git fetch -a
            mvn package
-           mvn sonar:sonar
+           mvn -B sonar:sonar
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         SONAR_ORGANIZATION: ${{secrets.SONAR_ORGANIZATION}}
