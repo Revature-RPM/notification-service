@@ -25,9 +25,14 @@ import com.revature.rpm.entities.Comment;
 import com.revature.rpm.services.AdapterService;
 import com.revature.rpm.services.NotificationService;
 
+/**
+ * Listener pools an AWS SQS Queue for new notifications.
+ * Conditionally disabled when scheduling.enabled is false or undefined to ensure that the Listener
+ * does not throw exceptions during test runs.
+ */
 @Component
 @ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = false)
-public class Listener implements InitializingBean {
+public class SQSListener implements InitializingBean {
 
 	// Injecting environment variable data into strings
 	@Value("${MESSAGING_ACCESS_KEY}")
@@ -52,7 +57,7 @@ public class Listener implements InitializingBean {
 	@Autowired
 	AdapterService adapterService;
 	
-	Logger logger = Logger.getLogger(Listener.class);
+	Logger logger = Logger.getLogger(SQSListener.class);
 
 	private BasicAWSCredentials credentials;
 	private AmazonSQS sqsClient;

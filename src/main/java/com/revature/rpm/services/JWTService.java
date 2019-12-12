@@ -7,7 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.revature.rpm.components.Listener;
+import com.revature.rpm.components.SQSListener;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -30,7 +30,7 @@ public class JWTService implements InitializingBean{
 	@Value("${JWT_SECRET:jwtsecret-reallylongsecretrequired}")
 	String secret;
 	
-	Logger logger = Logger.getLogger(Listener.class);
+	Logger logger = Logger.getLogger(SQSListener.class);
 	public JWTService() {
 		super();
 	}
