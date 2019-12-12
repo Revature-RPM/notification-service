@@ -15,4 +15,4 @@ security:
 
 # Property used to enable the SQS Listener
 scheduling:
-  enabled true
+  enabled: false

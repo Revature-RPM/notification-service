@@ -1,14 +1,0 @@
-server:
-  port: 13377
-
-spring:
-  application:
-      name: notification-service
-  datasource:    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
-    username: sa
-    password: sa
-security:
-  zsign:
-    secret: ${RPM_ZUUL_ACCESS_HEADER:local-deploy}
-    salt: ${RPM_ZUUL_ACCESS_SALT:local-deploy}

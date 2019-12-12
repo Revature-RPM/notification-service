@@ -8,6 +8,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ import com.revature.rpm.services.NotificationService;
  * does not throw exceptions during test runs.
  */
 @Component
-@ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = false)
+@Profile("!test")
 public class SQSListener implements InitializingBean {
 
 	// Injecting environment variable data into strings
