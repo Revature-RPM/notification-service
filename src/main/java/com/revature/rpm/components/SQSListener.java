@@ -32,6 +32,7 @@ import com.revature.rpm.services.NotificationService;
  * does not throw exceptions during test runs.
  */
 @Component
+@ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = false)
 @Profile("!test")
 public class SQSListener implements InitializingBean {
 
