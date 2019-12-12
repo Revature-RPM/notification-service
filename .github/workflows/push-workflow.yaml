@@ -28,8 +28,7 @@ jobs:
       run: mvn sonar:sonar
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        SONAR_TOKEN: ${{secrets.SONAR_LOGIN}}
         SONAR_ORGANIZATION: ${{secrets.SONAR_ORGANIZATION}}
         SONAR_LOGIN: ${{secrets.SONAR_LOGIN}}
         SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
-        SONAR_PROJECT_KEY: ${{secrets.PROJECT_KEY}}
+        SONAR_PROJECT_KEY: ${{secrets.SONAR_PROJECT_KEY}}
