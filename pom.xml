@@ -12,6 +12,14 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.1.BUILD-SNAPSHOT</version>
 	</parent>
+
+	<properties>
+		<sonar.projectKey>${env.SONAR_PROJECT_KEY}</sonar.projectKey>
+		<sonar.organization>${env.SONAR_ORGANIZATION}</sonar.organization>
+		<sonar.host.url>${env.SONAR_HOST_URL}</sonar.host.url>
+		<sonar.login>${env.SONAR_LOGIN}</sonar.login>
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
