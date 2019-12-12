@@ -25,7 +25,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: SonarCloud Scan
-      run: mvn sonar:sonar
+      run: |
+           git fetch -a
+           mvn package
+           mvn sonar:sonar
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         SONAR_ORGANIZATION: ${{secrets.SONAR_ORGANIZATION}}
