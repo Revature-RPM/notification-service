@@ -14,8 +14,7 @@ import com.revature.rpm.entities.Notification;
  */
 @Service
 public class AdapterService {
-  // TODO Update parseNotification to accept an SQSDTO and return the appropriate notification type,
-  // not Notification literal
+  // TODO Update parseNotification to accept an SQSDTO and return the appropriate notification type, NOT Notification literal
   public Notification parseNotification(SQSDTO dto) {
     if (dto.getContentType() == "Comment") {
       Comment comment = new Comment();

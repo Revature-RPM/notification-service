@@ -2,6 +2,8 @@ package com.revature.rpm.entities;
 
 import javax.persistence.*;
 /**
+ * This is a sub-type of notificiations that adds short and long descriptions.
+ * 
  * @author James Meadows
  * @author Stefano Georges
  * @author Chong Ting
@@ -75,6 +77,5 @@ public class Comment extends Notification {
 
   public Comment() {
     super();
-    // TODO Auto-generated constructor stub
   }
 }

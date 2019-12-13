@@ -65,6 +65,9 @@ public class Controller {
   }
 
   /**
+   * Accepts a request in the format "/history?page=n" and returns all notifications that map to page n
+   * Default number of notifications per page is 20
+   * 
    * @param jws
    * @param page
    * @return
@@ -76,6 +79,15 @@ public class Controller {
     return notificationService.getNotificationsByPage(userid, page);
   }
 
+  /**
+   * Accepts a patch request to the "/" mapping, uses a readDTO containing notificationId and userId
+   * Checks against incoming JWT to validate the readDTO belongs to the correct session
+   * Changes state of a notification from unread to read (read = true)
+   * 
+   * @param readDTO
+   * @param jws
+   * @return
+   */
   @PatchMapping("/")
   public Boolean updateRead(
       @RequestBody ReadDTO readDTO, @RequestHeader("Authorization") String jws) {
@@ -84,6 +96,15 @@ public class Controller {
     return true;
   }
 
+  /**
+   * Accepts a patch request to the "/" mapping, uses a readDTO containing notificationId and userId
+   * Checks against incoming JWT to validate the readDTO belongs to the correct session
+   * Changes state of a notification from read to unread (read = false)
+   * 
+   * @param readDTO
+   * @param jws
+   * @return
+   */
   @PatchMapping("/unread/")
   public Boolean updateUnread(
       @RequestBody ReadDTO readDTO, @RequestHeader("Authorization") String jws) {

@@ -15,6 +15,9 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 /**
+ * This service manages authentication for the microservice via JWT.
+ * The current implementation uses a default secret string. 
+ * 
  * @author James Meadows
  * @author Stefano Georges
  * @author Chong Ting
@@ -59,6 +62,12 @@ public class JWTService implements InitializingBean {
     return Keys.hmacShaKeyFor(secretBytes);
   }
 
+  /**
+   * Accepts a JWT and returns the subject claim, in this application the subject is the userId.
+   * 
+   * @param jwsString
+   * @return
+   */
   public Integer extractUserIdFromJWT(String jwsString) {
     try {
       Jws<Claims> jwsclaims = Jwts.parser().setSigningKey(getSecret()).parseClaimsJws(jwsString);

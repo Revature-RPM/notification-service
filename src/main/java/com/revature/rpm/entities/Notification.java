@@ -4,6 +4,11 @@ import java.util.Date;
 
 import javax.persistence.*;
 /**
+ * This entity maps to a single table in the database.
+ * We use a single-table inheritance strategy with a discriminatory column. 
+ * This means we can store different sub-types of notifications inside a single table.
+ * The discriminator column tells us what type of notification each record is.
+ * 
  * @author James Meadows
  * @author Stefano Georges
  * @author Chong Ting

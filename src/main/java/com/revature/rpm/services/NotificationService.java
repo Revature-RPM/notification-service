@@ -18,6 +18,8 @@ import com.revature.rpm.entities.Notification;
 import com.revature.rpm.repositories.NotificationRepository;
 
 /**
+ * This service implements the business logic for each controller request.
+ * 
  * @author James Meadows
  * @author Stefano Georges
  * @author Chong Ting
@@ -35,6 +37,14 @@ public class NotificationService {
     this.notificationRepository = notificationRepository;
   }
 
+  /**
+   * Accepts a userId and a readDTO and updates a notifications state from unread to read (read = true).
+   * 
+   * @param jwtUserId
+   * @param readDTO
+   * @return
+   */
+  
   @Transactional
   public Boolean updateUnreadToRead(int jwtUserId, ReadDTO readDTO) {
     int notificationId = readDTO.getNotification_id();
@@ -53,6 +63,14 @@ public class NotificationService {
     return true;
   }
 
+  /**
+   * Accepts a userId and a readDTO and updates a notifications state from read to unread (read = false).
+   * 
+   * @param jwtUserId
+   * @param readDTO
+   * @return
+   */
+  
   @Transactional
   public Boolean updateReadToUnread(int jwtUserId, ReadDTO readDTO) {
     int notificationId = readDTO.getNotification_id();
@@ -71,10 +89,25 @@ public class NotificationService {
     return true;
   }
 
+  /**
+   * Accepts a userId and page number, returns a users notifications that map to the page number.
+   * 
+   * @param userid
+   * @param page
+   * @return
+   */
   public Page<Comment> getNotificationsByPage(int userid, Pageable page) {
     return notificationRepository.findByUserIdOrderByDateCreatedDesc(userid, page);
   }
 
+  /**
+   * Accepts a userId and returns all new notifications.
+   * If there are fewer than 5 notifications, add read notifications.
+   * The notifications are sorted by date with the most recent ones first.
+   * 
+   * @param userid
+   * @return
+   */
   public List<Comment> getAllNewNotifications(int userid) {
     // Creating a list with notifications that are not read
     List<Comment> newNotifications =
@@ -102,6 +135,11 @@ public class NotificationService {
     return newNotifications;
   }
 
+  /**
+   * Saves a notification to the database.
+   * 
+   * @param notification
+   */
   public void save(Notification notification) {
     notificationRepository.save(notification);
   }

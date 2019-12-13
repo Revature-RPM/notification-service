@@ -2,6 +2,14 @@ package com.revature.rpm.dto;
 
 import java.util.Date;
 
+/**
+ * DTO for mapping a message queue object to a notification.
+ * The AdapterService will convert this object into a notification of the appropriate type.
+ * 
+ * @author Christopher Troll
+ *
+ */
+
 public class SQSDTO {
   private String contentType;
   private int notificationId;
@@ -15,7 +23,6 @@ public class SQSDTO {
 
   public SQSDTO() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
   public SQSDTO(

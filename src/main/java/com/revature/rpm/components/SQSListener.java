@@ -27,7 +27,7 @@ import com.revature.rpm.services.AdapterService;
 import com.revature.rpm.services.NotificationService;
 
 /**
- * Listener pools an AWS SQS Queue for new notifications. Conditionally disabled when
+ * Listener polls an AWS SQS Queue for new notifications. Conditionally disabled when
  * scheduling.enabled is false or undefined to ensure that the Listener does not throw exceptions
  * during test runs.
  */
@@ -81,7 +81,7 @@ public class SQSListener implements InitializingBean {
         message -> {
           String body = message.getBody();
           SQSDTO dto = null;
-          //			Notification notification = null;
+          // Notification notification = null;
 
           try {
             dto = objectMapper.readValue(body, SQSDTO.class);
@@ -98,7 +98,7 @@ public class SQSListener implements InitializingBean {
 
           // Cast DTO into appropriate entity, then save it
           /*
-           * AdapterService should be updated to accept a SQSDTO and output the appropriate object type in the future
+           * TODO AdapterService should be updated to accept a SQSDTO and output the appropriate object type in the future
            * At the moment, the notificiation type is determined here.
            */
           if (dto.getContentType().equals("Comment")) {
@@ -108,7 +108,8 @@ public class SQSListener implements InitializingBean {
           }
         });
   }
-
+  
+  // Acknowledges that a message was received to the SQS message queue
   public ReceiveMessageResult getMessages() {
     ReceiveMessageRequest messageRequest = new ReceiveMessageRequest(queueUrl);
     messageRequest.setVisibilityTimeout(15);
@@ -116,6 +117,7 @@ public class SQSListener implements InitializingBean {
     return result;
   }
 
+  // Sends request to delete message to the SQS message queue
   public void deleteMessage(String receiptHandle) {
     DeleteMessageRequest deleteRequest = new DeleteMessageRequest(queueUrl, receiptHandle);
     sqsClient.deleteMessage(deleteRequest);
