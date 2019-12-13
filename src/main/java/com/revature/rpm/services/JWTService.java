@@ -27,7 +27,7 @@ import io.jsonwebtoken.security.Keys;
 public class JWTService implements InitializingBean{
 	byte[] secretBytes;
 	
-	@Value("${JWT_SECRET:jwtsecret-reallylongsecretrequired}")
+	@Value("${JWT_SECRET:jwtsecret-reallylongsecretrequiredjwtsecret-reallylongsecretrequired}")
 	String secret;
 	
 	Logger logger = Logger.getLogger(Listener.class);
