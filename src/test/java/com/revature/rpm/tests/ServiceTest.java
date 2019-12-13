@@ -1,6 +1,5 @@
 package com.revature.rpm.tests;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
@@ -16,13 +15,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -442,21 +437,6 @@ public class ServiceTest {
 		}
 		assertSame("There should be 1 is_read = false", falseCount, 1);
 		assertSame("There should be 4 is_read = true", trueCount, 4);
-	}
-	
-	//Testing Pagination Method
-	//Test #1: Verify pagination is return full page
-	@Test
-	public void testPaginationFullPage() {
-		List<Comment> mockList = new ArrayList<>();
-		
-		//This line dictate the outcome of the mock method
-		Pageable pageable = PageRequest.of(1, 20);
-		
-		Page<Comment> mockNote = new PageImpl(mockList, pageable, 400L);
-		Mockito.when(mockNotificationRepository.findByUserIdOrderByDateCreatedDesc(1, mockNote.getPageable())).thenReturn(mockNote);
-		assertThat(mockNotificationRepository.findByUserIdOrderByDateCreatedDesc(1, mockNote.getPageable()).getSize()).isGreaterThan(0);
-		assertThat(mockNotificationRepository.findByUserIdOrderByDateCreatedDesc(1, mockNote.getPageable()).getSize()).isEqualTo(20);
 	}
 
 }
