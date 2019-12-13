@@ -87,12 +87,10 @@ public class NotificationService {
 			}
 		}
 
-		//sort the whole list by date
+		//sort the whole list by date with the latest at the top
 		Collections.sort(newNotifications, (a,b) -> {
-			return a.getDateCreated().compareTo(b.getDateCreated());
+			return b.getDateCreated().compareTo(a.getDateCreated());
 		});
-		//change the order where the latest is the top
-		Collections.reverse(newNotifications);
 		return newNotifications;
 	}
 
