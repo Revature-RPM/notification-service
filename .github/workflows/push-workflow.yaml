@@ -1,0 +1,39 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Check
+      run: mvn clean package
+  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Unit Tests
+        run: mvn test
+  
+  sonarCloudTrigger:
+    name: SonarCloud Trigger
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        fetch-depth: 40
+    - name: SonarCloud Scan
+      run: |
+           git fetch -a
+           mvn package
+           mvn -B sonar:sonar
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        SONAR_ORGANIZATION: ${{secrets.SONAR_ORGANIZATION}}
+        SONAR_LOGIN: ${{secrets.SONAR_LOGIN}}
+        SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
+        SONAR_PROJECT_KEY: ${{secrets.SONAR_PROJECT_KEY}}

@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 13377
 
 spring:
   application:
@@ -13,3 +13,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+scheduling:
+  enabled: true
+#security:
+#  zsign:
+#    secret: ${RPM_ZUUL_ACCESS_HEADER:local-deploy}
+#    salt: ${RPM_ZUUL_ACCESS_SALT:local-deploy}
